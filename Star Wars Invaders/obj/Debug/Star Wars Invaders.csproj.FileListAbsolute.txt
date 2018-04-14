@@ -1,16 +1,15 @@
-c:\users\kristof\documents\visual studio 2015\Projects\Star Wars Invaders\Star Wars Invaders\bin\Debug\Star Wars Invaders.exe.config
-c:\Users\Kristof\Documents\Visual Studio 2015\Projects\Star Wars Invaders\Star Wars Invaders\bin\Debug\Star Wars Invaders.exe
-c:\Users\Kristof\Documents\Visual Studio 2015\Projects\Star Wars Invaders\Star Wars Invaders\bin\Debug\Star Wars Invaders.pdb
-c:\Users\Kristof\Documents\Visual Studio 2015\Projects\Star Wars Invaders\Star Wars Invaders\obj\Debug\MainWindow.g.cs
-c:\Users\Kristof\Documents\Visual Studio 2015\Projects\Star Wars Invaders\Star Wars Invaders\obj\Debug\App.g.cs
-c:\Users\Kristof\Documents\Visual Studio 2015\Projects\Star Wars Invaders\Star Wars Invaders\obj\Debug\Star Wars Invaders_MarkupCompile.cache
-c:\Users\Kristof\Documents\Visual Studio 2015\Projects\Star Wars Invaders\Star Wars Invaders\obj\Debug\Star Wars Invaders_MarkupCompile.lref
-c:\Users\Kristof\Documents\Visual Studio 2015\Projects\Star Wars Invaders\Star Wars Invaders\obj\Debug\MainWindow.baml
-c:\Users\Kristof\Documents\Visual Studio 2015\Projects\Star Wars Invaders\Star Wars Invaders\obj\Debug\Star Wars Invaders.g.resources
-c:\Users\Kristof\Documents\Visual Studio 2015\Projects\Star Wars Invaders\Star Wars Invaders\obj\Debug\Star_Wars_Invaders.Properties.Resources.resources
-c:\Users\Kristof\Documents\Visual Studio 2015\Projects\Star Wars Invaders\Star Wars Invaders\obj\Debug\Star Wars Invaders.csproj.GenerateResource.Cache
-c:\Users\Kristof\Documents\Visual Studio 2015\Projects\Star Wars Invaders\Star Wars Invaders\obj\Debug\Star Wars Invaders.exe
-c:\Users\Kristof\Documents\Visual Studio 2015\Projects\Star Wars Invaders\Star Wars Invaders\obj\Debug\Star Wars Invaders.pdb
-c:\Users\Kristof\Documents\Visual Studio 2015\Projects\Star Wars Invaders\Star Wars Invaders\obj\Debug\GeneratedInternalTypeHelper.g.cs
-c:\Users\Kristof\Documents\Visual Studio 2015\Projects\Star Wars Invaders\Star Wars Invaders\bin\Debug\Star Wars Invaders.exe.CodeAnalysisLog.xml
-c:\Users\Kristof\Documents\Visual Studio 2015\Projects\Star Wars Invaders\Star Wars Invaders\bin\Debug\Star Wars Invaders.exe.lastcodeanalysissucceeded
+C:\Users\Kristof\Documents\Visual Studio 2015\Projects\Star Wars Invaders\Star Wars Invaders\bin\Debug\Star Wars Invaders.exe.config
+C:\Users\Kristof\Documents\Visual Studio 2015\Projects\Star Wars Invaders\Star Wars Invaders\bin\Debug\Star Wars Invaders.exe
+C:\Users\Kristof\Documents\Visual Studio 2015\Projects\Star Wars Invaders\Star Wars Invaders\bin\Debug\Star Wars Invaders.pdb
+C:\Users\Kristof\Documents\Visual Studio 2015\Projects\Star Wars Invaders\Star Wars Invaders\obj\Debug\Star Wars Invaders.csprojResolveAssemblyReference.cache
+C:\Users\Kristof\Documents\Visual Studio 2015\Projects\Star Wars Invaders\Star Wars Invaders\obj\Debug\MainWindow.g.cs
+C:\Users\Kristof\Documents\Visual Studio 2015\Projects\Star Wars Invaders\Star Wars Invaders\obj\Debug\App.g.cs
+C:\Users\Kristof\Documents\Visual Studio 2015\Projects\Star Wars Invaders\Star Wars Invaders\obj\Debug\GeneratedInternalTypeHelper.g.cs
+C:\Users\Kristof\Documents\Visual Studio 2015\Projects\Star Wars Invaders\Star Wars Invaders\obj\Debug\Star Wars Invaders_MarkupCompile.cache
+C:\Users\Kristof\Documents\Visual Studio 2015\Projects\Star Wars Invaders\Star Wars Invaders\obj\Debug\Star Wars Invaders_MarkupCompile.lref
+C:\Users\Kristof\Documents\Visual Studio 2015\Projects\Star Wars Invaders\Star Wars Invaders\obj\Debug\MainWindow.baml
+C:\Users\Kristof\Documents\Visual Studio 2015\Projects\Star Wars Invaders\Star Wars Invaders\obj\Debug\Star Wars Invaders.g.resources
+C:\Users\Kristof\Documents\Visual Studio 2015\Projects\Star Wars Invaders\Star Wars Invaders\obj\Debug\Star_Wars_Invaders.Properties.Resources.resources
+C:\Users\Kristof\Documents\Visual Studio 2015\Projects\Star Wars Invaders\Star Wars Invaders\obj\Debug\Star Wars Invaders.csproj.GenerateResource.Cache
+C:\Users\Kristof\Documents\Visual Studio 2015\Projects\Star Wars Invaders\Star Wars Invaders\obj\Debug\Star Wars Invaders.exe
+C:\Users\Kristof\Documents\Visual Studio 2015\Projects\Star Wars Invaders\Star Wars Invaders\obj\Debug\Star Wars Invaders.pdb

@@ -7,7 +7,6 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="350" Width="525">
     <Grid>
-        <local:GameField/>
-
+        <local:GameField x:Name="Jatekter" />
     </Grid>
 </Window>
