@@ -9,24 +9,34 @@
     public class GameLogic
     {
         private Player kristof;
-        private int screenHeight;
-        private int screenWidth;
-
-        public GameLogic()
-        {
-            this.kristof = new Player();
-        }
-
-        public Player Kristof
+        public Player Kristof // represent one Player
         {
             get
             {
-                return kristof;
+                return this.kristof;
             }
 
             set
             {
-                kristof = value;
+                this.kristof = value;
+            }
+        }
+
+        public void Init()
+        {
+            this.kristof = new Player(683, 600);
+        }
+
+        public void Move(System.Windows.Input.Key pressed)
+        {
+            if (pressed == System.Windows.Input.Key.Left)
+            {
+                this.Kristof.Move(-5);
+            }
+
+            if (pressed == System.Windows.Input.Key.Right)
+            {
+                this.Kristof.Move(5);
             }
         }
     }

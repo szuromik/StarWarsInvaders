@@ -9,26 +9,11 @@
 
     public class Player
     {
-        public Rect playerRect;
         private Point playerPoint;
 
-        public Player()
+        public Player(double x, double y)
         {
-            this.playerPoint = new Point(200, 200);
-            this.playerRect = new Rect(this.PlayerPoint.X, this.PlayerPoint.Y, 60, 100);
-        }
-
-        public Rect PlayerRect
-        {
-            get
-            {
-                return this.playerRect;
-            }
-
-            set
-            {
-                this.playerRect = value;
-            }
+            this.playerPoint = new Point(x, y);
         }
 
         public Point PlayerPoint
@@ -47,7 +32,6 @@
         public void Move(int value)
         {
             this.playerPoint.X += value;
-            //this.playerRect = new Rect(this.PlayerPoint.X, this.playerPoint.Y, 60, 100);
         }
     }
 }

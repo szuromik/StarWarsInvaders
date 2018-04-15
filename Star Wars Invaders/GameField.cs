@@ -5,6 +5,7 @@
 namespace Star_Wars_Invaders
 {
     using System;
+    using System.Collections.Generic;
     using System.Windows;
     using System.Windows.Media;
     using System.Windows.Media.Imaging;
@@ -12,7 +13,38 @@ namespace Star_Wars_Invaders
     public class GameField : FrameworkElement
     {
         private ImageBrush playerBrush;
-        private GameLogic game;
+        private ImageBrush backgroundBrush;
+        private Size size;
+
+        public GameField()
+        {
+            this.KeyDown += this.GameField_KeyDown;
+            this.Loaded += this.GameField_Loaded;
+        }
+
+        public GameLogic Game { get; set; }
+
+        public void Init()
+        {
+            if (this.Game == null)
+            {
+                return;
+            }
+
+            this.Game.Init();
+            this.playerBrush = new ImageBrush(new BitmapImage(new Uri("Pics\\Player.png", UriKind.Relative)));
+            this.backgroundBrush = new ImageBrush(new BitmapImage(new Uri("Pics\\space.jpg", UriKind.Relative)));
+            this.InvalidateVisual();
+        }
+
+        protected override void OnRender(DrawingContext drawingContext)
+        {
+            if (this.Game != null)
+            {
+                drawingContext.DrawRectangle(this.backgroundBrush, null, new Rect(0, 0, 1366, 740));
+                drawingContext.DrawRectangle(this.playerBrush, null, new Rect(this.Game.Kristof.PlayerPoint.X, this.Game.Kristof.PlayerPoint.Y, 60, 100));
+            }
+        }
 
         private void GameField_Loaded(object sender, RoutedEventArgs e)
         {
@@ -20,30 +52,19 @@ namespace Star_Wars_Invaders
             this.Focus();
         }
 
-        public void Init()
-        {
-            this.playerBrush = new ImageBrush(new BitmapImage(new Uri("Pics\\Player.png", UriKind.Relative)));
-            game = new GameLogic();
-        }
-
-        protected override void OnRender(DrawingContext drawingContext)
-        {
-            drawingContext.DrawRectangle(this.playerBrush, null, new Rect(this.game.Kristof.playerRect.X,this.game.Kristof.playerRect.Y, 60, 100));
-        }
-
         private void GameField_KeyDown(object sender, System.Windows.Input.KeyEventArgs e)
         {
             if (e.Key == System.Windows.Input.Key.Left)
             {
-                this.game.Kristof.playerRect.X -= 50;
-                this.InvalidateVisual();
+                this.Game.Kristof.Move(-10);
             }
 
             if (e.Key == System.Windows.Input.Key.Right)
             {
-                this.game.Kristof.playerRect.X += 50;
-                this.InvalidateVisual();
+                this.Game.Kristof.Move(10);
             }
+
+            this.InvalidateVisual();
         }
     }
 }

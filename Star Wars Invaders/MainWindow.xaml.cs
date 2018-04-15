@@ -4,7 +4,9 @@
 
 namespace Star_Wars_Invaders
 {
+    using System;
     using System.Windows;
+    using System.Windows.Threading;
 
     /// <summary>
     /// Interaction logic for MainWindow.xaml
@@ -14,7 +16,13 @@ namespace Star_Wars_Invaders
         public MainWindow()
         {
             this.InitializeComponent();
+        }
+
+        private void Window_Loaded(object sender, RoutedEventArgs e)
+        {
+            this.Jatekter.Game = new GameLogic();
             this.Jatekter.Init();
         }
+
     }
 }
