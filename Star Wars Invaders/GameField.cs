@@ -12,59 +12,32 @@ namespace Star_Wars_Invaders
 
     public class GameField : FrameworkElement
     {
+        // there will be brushes
         private ImageBrush playerBrush;
         private ImageBrush backgroundBrush;
         private Size size;
+        private GameLogic vm;
 
-        public GameField()
+        public void Init(GameLogic vm)
         {
-            this.KeyDown += this.GameField_KeyDown;
-            this.Loaded += this.GameField_Loaded;
-        }
-
-        public GameLogic Game { get; set; }
-
-        public void Init()
-        {
-            if (this.Game == null)
-            {
-                return;
-            }
-
-            this.Game.Init();
+            this.vm = vm;
             this.playerBrush = new ImageBrush(new BitmapImage(new Uri("Pics\\Player.png", UriKind.Relative)));
             this.backgroundBrush = new ImageBrush(new BitmapImage(new Uri("Pics\\space.jpg", UriKind.Relative)));
-            this.InvalidateVisual();
         }
 
         protected override void OnRender(DrawingContext drawingContext)
         {
-            if (this.Game != null)
+            if (this.vm != null)
             {
-                drawingContext.DrawRectangle(this.backgroundBrush, null, new Rect(0, 0, 1366, 740));
-                drawingContext.DrawRectangle(this.playerBrush, null, new Rect(this.Game.Kristof.PlayerPoint.X, this.Game.Kristof.PlayerPoint.Y, 60, 100));
+                drawingContext.DrawRectangle(this.backgroundBrush, null, new Rect(0, 0, this.ActualWidth, this.ActualHeight));
+                drawingContext.DrawRectangle(this.playerBrush, null, new Rect(this.vm.Kristof.PlayerPoint.X, this.vm.Kristof.PlayerPoint.Y, 60, 100));
+
+                // Draw the bullets --> Tesz
+                foreach (Bullet item in this.vm.PlayerBullet)
+                {
+                    drawingContext.DrawEllipse(Brushes.Red, null, item.Location, 10, 10);
+                }
             }
-        }
-
-        private void GameField_Loaded(object sender, RoutedEventArgs e)
-        {
-            this.Focusable = true;
-            this.Focus();
-        }
-
-        private void GameField_KeyDown(object sender, System.Windows.Input.KeyEventArgs e)
-        {
-            if (e.Key == System.Windows.Input.Key.Left)
-            {
-                this.Game.Kristof.Move(-10);
-            }
-
-            if (e.Key == System.Windows.Input.Key.Right)
-            {
-                this.Game.Kristof.Move(10);
-            }
-
-            this.InvalidateVisual();
         }
     }
 }

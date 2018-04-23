@@ -13,6 +13,9 @@ namespace Star_Wars_Invaders
     /// </summary>
     public partial class MainWindow : Window
     {
+        private GameLogic vm;
+        private DispatcherTimer timer;
+
         public MainWindow()
         {
             this.InitializeComponent();
@@ -20,9 +23,23 @@ namespace Star_Wars_Invaders
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            this.Jatekter.Game = new GameLogic();
-            this.Jatekter.Init();
+            this.vm = new GameLogic(new Size(this.Jatekter.ActualWidth, this.Jatekter.ActualHeight));
+            this.Jatekter.Init(this.vm);
+            this.timer = new DispatcherTimer();
+            this.timer.Interval = TimeSpan.FromMilliseconds(30);
+            this.timer.Tick += this.Timer_Tick;
+            this.timer.Start();
         }
 
+        private void Timer_Tick(object sender, EventArgs e)
+        {
+            this.vm.Move();
+            this.Jatekter.InvalidateVisual();
+        }
+
+        private void Window_KeyDown(object sender, System.Windows.Input.KeyEventArgs e)
+        {
+            this.vm.Billentyunyomas(e.Key);
+        }
     }
 }

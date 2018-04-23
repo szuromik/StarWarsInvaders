@@ -1,13 +1,74 @@
-﻿namespace Star_Wars_Invaders
+﻿// <copyright file="Bullet.cs" company="PlaceholderCompany">
+// Copyright (c) PlaceholderCompany. All rights reserved.
+// </copyright>
+
+namespace Star_Wars_Invaders
 {
     using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Text;
     using System.Threading.Tasks;
+    using System.Windows;
 
-    class Bullet
+    public enum BulletType { Simple, Laser }
+
+    public class Bullet
     {
+        private Point location;
+        private Rect shape;
+        private BulletType type;
 
+        public Bullet(Point location)
+        {
+            this.Location = location;
+            this.Shape = new Rect(location.X, location.Y, 10, 10);
+            this.Type = BulletType.Simple;
+        }
+
+        public Point Location
+        {
+            get
+            {
+                return this.location;
+            }
+
+            set
+            {
+                this.location = value;
+            }
+        }
+
+        public Rect Shape
+        {
+            get
+            {
+                return this.shape;
+            }
+
+            set
+            {
+                this.shape = value;
+            }
+        }
+
+        public BulletType Type
+        {
+            get
+            {
+                return this.type;
+            }
+
+            set
+            {
+                this.type = value;
+            }
+        }
+
+        public void MovePlayerBullets()
+        {
+            this.location.Y -= 20;
+            this.shape.Y -= 20;
+        }
     }
 }

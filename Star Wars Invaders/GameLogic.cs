@@ -5,11 +5,23 @@
     using System.Linq;
     using System.Text;
     using System.Threading.Tasks;
+    using System.Windows;
+    using System.Windows.Input;
 
     public class GameLogic
     {
         private Player kristof;
-        public Player Kristof // represent one Player
+        private Size size;
+        private List<Bullet> playerBullet;
+
+        public GameLogic(Size size)
+        {
+            this.size = size;
+            this.Init(this.size);
+            this.PlayerBullet = new List<Bullet>();
+        }
+
+        public Player Kristof
         {
             get
             {
@@ -22,22 +34,64 @@
             }
         }
 
-        public void Init()
+        public List<Bullet> PlayerBullet
         {
-            this.kristof = new Player(683, 600);
+            get
+            {
+                return this.playerBullet;
+            }
+
+            set
+            {
+                this.playerBullet = value;
+            }
         }
 
-        public void Move(System.Windows.Input.Key pressed)
+        public void Init(Size size)
         {
-            if (pressed == System.Windows.Input.Key.Left)
+            this.kristof = new Player(this.size.Width / 2, this.size.Height - 100);
+        }
+
+        public void Billentyunyomas(Key e)
+        {
+            if (e == Key.Left)
             {
-                this.Kristof.Move(-5);
+                int value = -10;
+                if (this.Kristof.PlayerPoint.X + value > 0)
+                {
+                    this.Kristof.Move(value);
+                }
+                else
+                {
+                    return;
+                }
             }
 
-            if (pressed == System.Windows.Input.Key.Right)
+            if (e == Key.Right)
             {
-                this.Kristof.Move(5);
+                int value = 10;
+                if (this.Kristof.PlayerPoint.X + 60 + value < this.size.Width)
+                {
+                    this.Kristof.Move(value);
+                }
+                else
+                {
+                    return;
+                }
             }
+
+            if (e == Key.Space)
+            {
+                this.playerBullet.Add(new Bullet(new Point(this.kristof.PlayerPoint.X+30,this.size.Height - 100)));
+            }
+        }
+
+            public void Move() // it will move everything
+                {
+                    foreach (Bullet item in this.playerBullet)
+                    {
+                        item.MovePlayerBullets();
+                    }
+                }
         }
     }
-}
