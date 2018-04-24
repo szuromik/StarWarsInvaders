@@ -15,7 +15,7 @@ namespace Star_Wars_Invaders
         // there will be brushes
         private ImageBrush playerBrush;
         private ImageBrush backgroundBrush;
-        private Size size;
+        //private Size size;
         private GameLogic vm;
 
         public void Init(GameLogic vm)
@@ -32,11 +32,17 @@ namespace Star_Wars_Invaders
                 drawingContext.DrawRectangle(this.backgroundBrush, null, new Rect(0, 0, this.ActualWidth, this.ActualHeight));
                 drawingContext.DrawRectangle(this.playerBrush, null, new Rect(this.vm.Kristof.PlayerPoint.X, this.vm.Kristof.PlayerPoint.Y, 60, 100));
 
-                // Draw the bullets --> Tesz
+                // Draw the bullets --> Teszt
                 foreach (Bullet item in this.vm.PlayerBullet)
                 {
                     drawingContext.DrawEllipse(Brushes.Red, null, item.Location, 10, 10);
                 }
+
+                foreach (Rect rect in this.vm.random_fos)
+                {
+                    drawingContext.DrawRectangle(Brushes.Yellow, null, rect);
+                }
+
             }
         }
     }

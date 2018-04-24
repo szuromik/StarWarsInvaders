@@ -11,13 +11,16 @@ namespace Star_Wars_Invaders
     using System.Threading.Tasks;
     using System.Windows;
 
-    public enum BulletType { Simple, Laser }
+    public enum BulletType
+    {
+        Simple, Laser
+    }
 
     public class Bullet
     {
         private Point location;
         private Rect shape;
-        private BulletType type;
+        private BulletType bulletType;
 
         public Bullet(Point location)
         {
@@ -56,19 +59,19 @@ namespace Star_Wars_Invaders
         {
             get
             {
-                return this.type;
+                return this.bulletType;
             }
 
             set
             {
-                this.type = value;
+                this.bulletType = value;
             }
         }
 
         public void MovePlayerBullets()
         {
-            this.location.Y -= 20;
-            this.shape.Y -= 20;
+            this.location.Y -= 10;
+            this.shape.Y -= 10;
         }
     }
 }

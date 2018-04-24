@@ -26,7 +26,7 @@ namespace Star_Wars_Invaders
             this.vm = new GameLogic(new Size(this.Jatekter.ActualWidth, this.Jatekter.ActualHeight));
             this.Jatekter.Init(this.vm);
             this.timer = new DispatcherTimer();
-            this.timer.Interval = TimeSpan.FromMilliseconds(30);
+            this.timer.Interval = TimeSpan.FromMilliseconds(25);
             this.timer.Tick += this.Timer_Tick;
             this.timer.Start();
         }
