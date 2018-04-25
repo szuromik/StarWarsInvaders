@@ -6,12 +6,8 @@
     using System.Text;
     using System.Threading.Tasks;
 
-    public class Enemy
+    public class PickableElement
     {
-        // Need a location Point
-        // Need a bullet List
-        // Need Move method
-        // Need a shoot method
 
     }
 }

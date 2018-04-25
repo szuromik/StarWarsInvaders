@@ -10,54 +10,30 @@
 
     public class GameLogic
     {
-        private Player kristof;
+        private Player player;
         private Size size;
-        private List<Bullet> playerBullet;
         private List<Bullet> bulletsToDelete;
-        public List<Rect> random_fos;
+        private List<Enemy> enemyList;
         private Random r = new Random();
+        private Bullet bulletToAdd;
 
         public GameLogic(Size size)
         {
             this.size = size;
-            this.Init(this.size);
-            this.PlayerBullet = new List<Bullet>();
-            this.random_fos = new List<Rect>();
-            for (int i = 0; i < 50; i++)
-            {
-                this.random_fos.Add(new Rect(r.Next(0, 500), r.Next(0, 500), 25, 25));
-            }
+            this.player = new Player(this.size.Width / 2, this.size.Height - 100);
         }
 
-        public Player Kristof
+        public Player Player
         {
             get
             {
-                return this.kristof;
+                return this.player;
             }
 
             set
             {
-                this.kristof = value;
+                this.player = value;
             }
-        }
-
-        public List<Bullet> PlayerBullet
-        {
-            get
-            {
-                return this.playerBullet;
-            }
-
-            set
-            {
-                this.playerBullet = value;
-            }
-        }
-
-        public void Init(Size size)
-        {
-            this.kristof = new Player(this.size.Width / 2, this.size.Height - 100);
         }
 
         public void Billentyunyomas(Key e)
@@ -65,9 +41,9 @@
             if (e == Key.Left)
             {
                 int value = -10;
-                if (this.Kristof.PlayerPoint.X + value > 0)
+                if (this.Player.PlayerPoint.X + value > 0)
                 {
-                    this.Kristof.Move(value);
+                    this.Player.Move(value);
                 }
                 else
                 {
@@ -78,9 +54,9 @@
             if (e == Key.Right)
             {
                 int value = 10;
-                if (this.Kristof.PlayerPoint.X + 60 + value < this.size.Width)
+                if (this.Player.PlayerPoint.X + 60 + value < this.size.Width)
                 {
-                    this.Kristof.Move(value);
+                    this.Player.Move(value);
                 }
                 else
                 {
@@ -88,25 +64,29 @@
                 }
             }
 
-            if (e == Key.Space)
+            if (e == Key.LeftShift || e == Key.RightShift)
             {
-                this.playerBullet.Add(new Bullet(new Point(this.kristof.PlayerPoint.X + 30, this.size.Height - 100)));
+                this.Player.ChangeWeapon();
+            }
+            else if (e == Key.Space)
+            {
+                this.Player.Shoot();
             }
         }
 
-           public void Move()
-                {
-                    foreach (Bullet item in this.playerBullet)
-                    {
-                        item.MovePlayerBullets();
-                    }
+        public void Move()
+        {
+            foreach (Bullet item in this.Player.Bullets)
+            {
+                item.MovePlayerBullets();
+            }
 
-                    this.FindInactiveBullet(this.playerBullet);
-                    this.PlayerBullettCollideWithEnemy();
-                }
+            this.FindInactiveBullet(this.Player.Bullets);
+            this.PlayerBullettCollideWithEnemy();
+        }
 
         private void FindInactiveBullet(List<Bullet> bulletToInvestigate) // Ez fogja megtalálni és kitörölni azon a lövedékeket amelyek elhagyták a pályát
-            {
+        {
             this.bulletsToDelete = new List<Bullet>();
             foreach (Bullet bullet in bulletToInvestigate)
             {
@@ -124,29 +104,11 @@
             {
                 bulletToInvestigate.Remove(item);
             }
-            }
+        }
 
         private void PlayerBullettCollideWithEnemy()
         {
-            List<Rect> RectToDelete = new List<Rect>();
-            foreach (Bullet bullet in playerBullet)
-            {
-                foreach (Rect rect in random_fos)
-                {
-                    if (bullet.Shape.IntersectsWith(rect))
-                        {
-                        RectToDelete.Add(rect);
-                        }
-
-                    }
-                }
-
-            foreach (Rect rect in RectToDelete)
-            {
-                random_fos.Remove(rect);
-            }
-            }
+            // Some code Here
         }
-        }
-    
-
+    }
+}

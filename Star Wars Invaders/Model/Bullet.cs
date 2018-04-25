@@ -22,11 +22,11 @@ namespace Star_Wars_Invaders
         private Rect shape;
         private BulletType bulletType;
 
-        public Bullet(Point location)
+        public Bullet(Point location, BulletType bulletType)
         {
             this.Location = location;
             this.Shape = new Rect(location.X, location.Y, 10, 10);
-            this.Type = BulletType.Simple;
+            this.bulletType = bulletType;
         }
 
         public Point Location
@@ -55,7 +55,7 @@ namespace Star_Wars_Invaders
             }
         }
 
-        public BulletType Type
+        public BulletType BulletType
         {
             get
             {

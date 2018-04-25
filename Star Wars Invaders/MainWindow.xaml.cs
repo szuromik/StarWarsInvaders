@@ -21,16 +21,6 @@ namespace Star_Wars_Invaders
             this.InitializeComponent();
         }
 
-        private void Window_Loaded(object sender, RoutedEventArgs e)
-        {
-            this.vm = new GameLogic(new Size(this.Jatekter.ActualWidth, this.Jatekter.ActualHeight));
-            this.Jatekter.Init(this.vm);
-            this.timer = new DispatcherTimer();
-            this.timer.Interval = TimeSpan.FromMilliseconds(25);
-            this.timer.Tick += this.Timer_Tick;
-            this.timer.Start();
-        }
-
         private void Timer_Tick(object sender, EventArgs e)
         {
             this.vm.Move();
@@ -40,6 +30,16 @@ namespace Star_Wars_Invaders
         private void Window_KeyDown(object sender, System.Windows.Input.KeyEventArgs e)
         {
             this.vm.Billentyunyomas(e.Key);
+        }
+
+        private void Window_Loaded(object sender, RoutedEventArgs e)
+        {
+            this.vm = new GameLogic(new Size(this.Jatekter.ActualWidth, this.Jatekter.ActualHeight));
+            this.Jatekter.Init(this.vm);
+            this.timer = new DispatcherTimer();
+            this.timer.Interval = TimeSpan.FromMilliseconds(25);
+            this.timer.Tick += this.Timer_Tick;
+            this.timer.Start();
         }
     }
 }
