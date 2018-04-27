@@ -23,7 +23,7 @@ namespace Star_Wars_Invaders
 
         private void Timer_Tick(object sender, EventArgs e)
         {
-            this.vm.Move();
+            this.vm.DoTurn();
             this.Jatekter.InvalidateVisual();
         }
 
@@ -41,5 +41,6 @@ namespace Star_Wars_Invaders
             this.timer.Tick += this.Timer_Tick;
             this.timer.Start();
         }
+
     }
 }

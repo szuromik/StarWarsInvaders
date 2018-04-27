@@ -8,12 +8,14 @@
         private List<Bullet> bullets;
         private Point playerPoint;
         private BulletType actualType;
+        private Rect shape;
 
         public Player(double x, double y)
         {
             this.playerPoint = new Point(x, y);
             this.Bullets = new List<Bullet>();
             this.actualType = BulletType.Simple;
+            this.shape = new Rect(x, y, 50, 50);
         }
 
         public Point PlayerPoint
@@ -58,6 +60,7 @@
         public void Move(int value)
         {
             this.playerPoint.X += value;
+            this.shape.X += value;
         }
 
         public void Shoot()

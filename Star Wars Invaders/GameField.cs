@@ -15,6 +15,10 @@ namespace Star_Wars_Invaders
         // there will be brushes
         private ImageBrush playerBrush;
         private ImageBrush backgroundBrush;
+        private ImageBrush enemy1; // need to Initalize
+        private ImageBrush enemy2;
+        private ImageBrush enemy3;
+        private ImageBrush enemy4;
         private GameLogic vm;
 
         public void Init(GameLogic vm)
@@ -30,18 +34,8 @@ namespace Star_Wars_Invaders
             {
                 drawingContext.DrawRectangle(this.backgroundBrush, null, new Rect(0, 0, this.ActualWidth, this.ActualHeight));
                 drawingContext.DrawRectangle(this.playerBrush, null, new Rect(this.vm.Player.PlayerPoint.X, this.vm.Player.PlayerPoint.Y, 60, 100));
-
-                foreach (Bullet item in this.vm.Player.Bullets)
-                {
-                    if (item.BulletType == BulletType.Laser)
-                    {
-                        drawingContext.DrawEllipse(Brushes.Green, null, item.Location, 10, 10);
-                    }
-                    else
-                    {
-                        drawingContext.DrawEllipse(Brushes.Blue, null, item.Location, 10, 10);
-                    }
-                }
+                DrawingContextHelp.DrawPlayerBullets(drawingContext, this.vm);
+                DrawingContextHelp.DrawEnemies(drawingContext, this.vm);
             }
         }
     }

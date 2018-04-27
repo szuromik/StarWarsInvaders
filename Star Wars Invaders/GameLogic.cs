@@ -15,12 +15,18 @@
         private List<Bullet> bulletsToDelete;
         private List<Enemy> enemyList;
         private Random r = new Random();
-        private Bullet bulletToAdd;
+        private bool gameEnd;
+        private List<Enemy> enemyToDelete;
 
         public GameLogic(Size size)
         {
             this.size = size;
             this.player = new Player(this.size.Width / 2, this.size.Height - 100);
+            this.enemyList = new List<Enemy>();
+            for (int i = 0; i < 120; i++)
+            {
+                this.enemyList.Add(new Enemy(this.r.Next(20, 500), this.r.Next(20, 450)));
+            }
         }
 
         public Player Player
@@ -34,6 +40,40 @@
             {
                 this.player = value;
             }
+        }
+
+        public bool GameEnd
+        {
+            get
+            {
+                return this.gameEnd;
+            }
+
+            set
+            {
+                this.gameEnd = value;
+            }
+        }
+
+        public List<Enemy> EnemyList
+        {
+            get
+            {
+                return this.enemyList;
+            }
+
+            set
+            {
+                this.enemyList = value;
+            }
+        }
+
+        public void DoTurn()
+        {
+            this.CollisionDetection();
+            this.Move();
+            this.FindInactiveBullet(this.Player.Bullets);
+            this.PlayerBullettCollideWithEnemy();
         }
 
         public void Billentyunyomas(Key e)
@@ -74,15 +114,12 @@
             }
         }
 
-        public void Move()
+        private void Move()
         {
             foreach (Bullet item in this.Player.Bullets)
             {
                 item.MovePlayerBullets();
             }
-
-            this.FindInactiveBullet(this.Player.Bullets);
-            this.PlayerBullettCollideWithEnemy();
         }
 
         private void FindInactiveBullet(List<Bullet> bulletToInvestigate) // Ez fogja megtalálni és kitörölni azon a lövedékeket amelyek elhagyták a pályát
@@ -99,16 +136,48 @@
                 }
             }
 
-            // And now we will delete these bullets
             foreach (Bullet item in this.bulletsToDelete)
             {
                 bulletToInvestigate.Remove(item);
             }
         }
 
+        private void CollisionDetection()
+        {
+            this.PlayerBullettCollideWithEnemy();
+            this.EnemyBulletsCollisionWithPlayer();
+            this.PlayerCollisionWithPickableElement();
+        }
+
         private void PlayerBullettCollideWithEnemy()
         {
-            // Some code Here
+            this.enemyToDelete = new List<Enemy>();
+            foreach (Bullet bullet in this.Player.Bullets)
+            {
+                foreach (Enemy enemy in this.enemyList)
+                {
+                    if (bullet.Shape.IntersectsWith(enemy.Shape))
+                    {
+                        this.enemyToDelete.Add(enemy);
+                    }
+                }
+            }
+
+            foreach (Enemy enemy in this.enemyToDelete)
+            {
+                this.enemyList.Remove(enemy);
+            }
         }
+
+        private void EnemyBulletsCollisionWithPlayer()
+        {
+            // Some code here
+        }
+
+        private void PlayerCollisionWithPickableElement()
+        {
+            // Some Code Here
+        }
+
     }
 }

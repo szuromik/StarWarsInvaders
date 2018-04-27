@@ -67,6 +67,8 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="DrawingContextHelp.cs" />
+    <Compile Include="Model\Menu.cs" />
     <Compile Include="Model\Bullet.cs" />
     <Compile Include="Model\Enemy.cs" />
     <Compile Include="GameField.cs" />
