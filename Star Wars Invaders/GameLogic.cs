@@ -17,16 +17,18 @@
         private Random r = new Random();
         private bool gameEnd;
         private List<Enemy> enemyToDelete;
+        private Menu mainMenu;
 
         public GameLogic(Size size)
         {
             this.size = size;
             this.player = new Player(this.size.Width / 2, this.size.Height - 100);
             this.enemyList = new List<Enemy>();
-            for (int i = 0; i < 120; i++)
+            for (int i = 0; i < 50; i++)
             {
                 this.enemyList.Add(new Enemy(this.r.Next(20, 500), this.r.Next(20, 450)));
             }
+            this.mainMenu = new Menu();
         }
 
         public Player Player
@@ -68,12 +70,19 @@
             }
         }
 
+        public Menu MainMenu
+        {
+            get
+            {
+                return this.mainMenu;
+            }
+        }
+
         public void DoTurn()
         {
-            this.CollisionDetection();
             this.Move();
-            this.FindInactiveBullet(this.Player.Bullets);
             this.PlayerBullettCollideWithEnemy();
+            this.FindInactiveBullet(this.Player.Bullets);
         }
 
         public void Billentyunyomas(Key e)
@@ -110,6 +119,7 @@
             }
             else if (e == Key.Space)
             {
+                this.MainMenu.IsMenuInactive = true;
                 this.Player.Shoot();
             }
         }
@@ -142,13 +152,6 @@
             }
         }
 
-        private void CollisionDetection()
-        {
-            this.PlayerBullettCollideWithEnemy();
-            this.EnemyBulletsCollisionWithPlayer();
-            this.PlayerCollisionWithPickableElement();
-        }
-
         private void PlayerBullettCollideWithEnemy()
         {
             this.enemyToDelete = new List<Enemy>();
@@ -166,6 +169,7 @@
             foreach (Enemy enemy in this.enemyToDelete)
             {
                 this.enemyList.Remove(enemy);
+                this.player.Score += 10;
             }
         }
 

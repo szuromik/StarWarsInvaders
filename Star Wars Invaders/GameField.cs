@@ -32,10 +32,18 @@ namespace Star_Wars_Invaders
         {
             if (this.vm != null)
             {
-                drawingContext.DrawRectangle(this.backgroundBrush, null, new Rect(0, 0, this.ActualWidth, this.ActualHeight));
-                drawingContext.DrawRectangle(this.playerBrush, null, new Rect(this.vm.Player.PlayerPoint.X, this.vm.Player.PlayerPoint.Y, 60, 100));
-                DrawingContextHelp.DrawPlayerBullets(drawingContext, this.vm);
-                DrawingContextHelp.DrawEnemies(drawingContext, this.vm);
+                if (!this.vm.MainMenu.IsMenuInactive)
+                {
+                    DrawingContextHelp.DrawMenu(drawingContext, this.vm);
+                }
+                else
+                {
+                    drawingContext.DrawRectangle(this.backgroundBrush, null, new Rect(0, 0, this.ActualWidth, this.ActualHeight));
+                    drawingContext.DrawRectangle(this.playerBrush, null, new Rect(this.vm.Player.PlayerPoint.X, this.vm.Player.PlayerPoint.Y, 60, 100));
+                    DrawingContextHelp.DrawPlayerBullets(drawingContext, this.vm);
+                    DrawingContextHelp.DrawEnemies(drawingContext, this.vm);
+                    DrawingContextHelp.DrawPlayerScore(drawingContext, this.vm);
+                }
             }
         }
     }

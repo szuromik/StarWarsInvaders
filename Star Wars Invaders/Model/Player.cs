@@ -9,6 +9,7 @@
         private Point playerPoint;
         private BulletType actualType;
         private Rect shape;
+        private int score;
 
         public Player(double x, double y)
         {
@@ -16,6 +17,7 @@
             this.Bullets = new List<Bullet>();
             this.actualType = BulletType.Simple;
             this.shape = new Rect(x, y, 50, 50);
+            this.score = 0;
         }
 
         public Point PlayerPoint
@@ -57,6 +59,19 @@
             }
         }
 
+        public int Score
+        {
+            get
+            {
+                return this.score;
+            }
+
+            set
+            {
+                this.score = value;
+            }
+        }
+
         public void Move(int value)
         {
             this.playerPoint.X += value;
@@ -79,6 +94,5 @@
                 this.actualType = BulletType.Laser;
             }
         }
-
     }
 }

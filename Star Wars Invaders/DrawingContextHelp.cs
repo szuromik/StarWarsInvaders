@@ -10,10 +10,23 @@
 
     public static class DrawingContextHelp
     {
-        public static void DrawMenu(DrawingContext drawingContext)
+        public static void DrawMenu(DrawingContext drawingContext, GameLogic vm)
+        {
+            int i = 0;
+            foreach (string menu in vm.MainMenu.MenuElements)
             {
-            drawingContext.DrawEllipse(Brushes.Azure, null, new Point(300, 300), 40, 40);
+                drawingContext.DrawText(
+                new FormattedText(
+                    menu.ToString(),
+                System.Globalization.CultureInfo.CurrentCulture,
+                FlowDirection.LeftToRight,
+                    new Typeface(
+                    new FontFamily("Arial"), FontStyles.Normal, FontWeights.Bold, FontStretches.Normal), 24, Brushes.Red),
+                    new Point(200, (i*50)+200)
+                );
+                i++;
             }
+        }
 
         public static void DrawPlayerBullets(DrawingContext drawingContext, GameLogic vm)
         {
@@ -21,11 +34,11 @@
             {
                 if (item.BulletType == BulletType.Laser)
                 {
-                    drawingContext.DrawEllipse(Brushes.Green, null, item.Location, 5, 5);
+                    drawingContext.DrawEllipse(Brushes.Green, null, item.Location, 7, 5);
                 }
                 else
                 {
-                    drawingContext.DrawEllipse(Brushes.Blue, null, item.Location, 5, 5);
+                    drawingContext.DrawEllipse(Brushes.Blue, null, item.Location, 7, 5);
                 }
             }
         }
@@ -36,6 +49,23 @@
             {
                 drawingContext.DrawRectangle(Brushes.Azure, new Pen(Brushes.Black,1), new Rect(enemy.EnemyPoint.X, enemy.EnemyPoint.Y, enemy.Shape.Width, enemy.Shape.Height));
             }
+        }
+
+        public static void DrawPlayerScore(DrawingContext drawingContext, GameLogic vm)
+        {
+            drawingContext.DrawText(
+                    new FormattedText(
+                        vm.Player.Score.ToString(),
+                    System.Globalization.CultureInfo.CurrentCulture,
+                    FlowDirection.LeftToRight, new Typeface(
+                        new FontFamily("Arial"),
+                        FontStyles.Normal,
+                        FontWeights.Bold,
+                        FontStretches.Normal),
+                        14,
+                        Brushes.White),
+                        new Point(10, 10)
+                    );
         }
     }
 }
