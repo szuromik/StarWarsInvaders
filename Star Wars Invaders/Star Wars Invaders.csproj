@@ -81,6 +81,7 @@
   <ItemGroup>
     <Compile Include="Model\Player.cs" />
     <Compile Include="Model\PickableElement.cs" />
+    <Compile Include="Model\Scores.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>

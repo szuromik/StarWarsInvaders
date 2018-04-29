@@ -12,19 +12,25 @@
     {
         public static void DrawMenu(DrawingContext drawingContext, GameLogic vm)
         {
-            int i = 0;
-            foreach (string menu in vm.MainMenu.MenuElements)
+            for (int i = 0; i < vm.MainMenu.MenuElements.Count; i++)
             {
+                SolidColorBrush menuElementColor;
+                if (i == vm.MainMenu.ChoosenMenuElement)
+                {
+                    menuElementColor = Brushes.White;
+                }
+                else
+                {
+                    menuElementColor = Brushes.Red;
+                }
+
                 drawingContext.DrawText(
                 new FormattedText(
-                    menu.ToString(),
+                    vm.MainMenu.MenuElements[i].ToString(),
                 System.Globalization.CultureInfo.CurrentCulture,
                 FlowDirection.LeftToRight,
-                    new Typeface(
-                    new FontFamily("Arial"), FontStyles.Normal, FontWeights.Bold, FontStretches.Normal), 24, Brushes.Red),
-                    new Point(200, (i*50)+200)
-                );
-                i++;
+                    new Typeface(new FontFamily("Arial"), FontStyles.Normal, FontWeights.Bold, FontStretches.Normal), 24, menuElementColor),
+                    new Point(200, (i * 50) + 200));
             }
         }
 
@@ -47,7 +53,7 @@
         {
             foreach (Enemy enemy in vm.EnemyList)
             {
-                drawingContext.DrawRectangle(Brushes.Azure, new Pen(Brushes.Black,1), new Rect(enemy.EnemyPoint.X, enemy.EnemyPoint.Y, enemy.Shape.Width, enemy.Shape.Height));
+                drawingContext.DrawRectangle(Brushes.Azure, new Pen(Brushes.Black, 1), new Rect(enemy.EnemyPoint.X, enemy.EnemyPoint.Y, enemy.Shape.Width, enemy.Shape.Height));
             }
         }
 
@@ -64,8 +70,7 @@
                         FontStretches.Normal),
                         14,
                         Brushes.White),
-                        new Point(10, 10)
-                    );
+                        new Point(10, 10));
         }
     }
 }

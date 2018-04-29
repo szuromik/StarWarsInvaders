@@ -9,8 +9,6 @@
 
     public class Enemy
     {
-        // Need a location Point
-        // Need a bullet List
         // Need Move method
         // Need a shoot method
         private Rect shape;
@@ -61,6 +59,16 @@
             {
                 this.shape = value;
             }
+        }
+
+        public void Move()
+        {
+            // Some Code Here
+        }
+
+        public void Shoot()
+        {
+            // Some Code Here
         }
     }
 }

@@ -28,6 +28,7 @@
             {
                 this.enemyList.Add(new Enemy(this.r.Next(20, 500), this.r.Next(20, 450)));
             }
+
             this.mainMenu = new Menu();
         }
 
@@ -119,8 +120,22 @@
             }
             else if (e == Key.Space)
             {
-                this.MainMenu.IsMenuInactive = true;
                 this.Player.Shoot();
+            }
+
+            if (e == Key.Down)
+            {
+                this.MainMenu.MenuDown();
+            }
+
+            if (e == Key.Up)
+            {
+                this.MainMenu.MenuUp();
+            }
+
+            if (e == Key.Enter)
+            {
+                this.MainMenu.ChooseMenuElement();
             }
         }
 
@@ -182,6 +197,5 @@
         {
             // Some Code Here
         }
-
     }
 }
