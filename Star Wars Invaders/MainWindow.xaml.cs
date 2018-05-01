@@ -5,6 +5,7 @@
 namespace Star_Wars_Invaders
 {
     using System;
+    using System.Diagnostics;
     using System.Windows;
     using System.Windows.Threading;
 
@@ -15,6 +16,7 @@ namespace Star_Wars_Invaders
     {
         private GameLogic vm;
         private DispatcherTimer timer;
+        private int tickCounting;
 
         public MainWindow()
         {
@@ -27,6 +29,12 @@ namespace Star_Wars_Invaders
             {
                 this.vm.DoTurn();
                 this.Jatekter.InvalidateVisual();
+                if (this.tickCounting % 40 == 0)
+                {
+                    this.vm.Player.Score++;
+                }
+
+                this.tickCounting++;
             }
             else
             {

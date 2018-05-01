@@ -19,7 +19,7 @@
         {
             this.enemyPoint = new Point(x, y);
             this.bullets = new List<Bullet>();
-            this.shape = new Rect(x, y, 20, 20);
+            this.shape = new Rect(x, y, 80, 120);
         }
 
         public List<Bullet> Bullets

@@ -24,7 +24,7 @@
             this.size = size;
             this.player = new Player(this.size.Width / 2, this.size.Height - 100);
             this.enemyList = new List<Enemy>();
-            for (int i = 0; i < 50; i++)
+            for (int i = 0; i < 20; i++)
             {
                 this.enemyList.Add(new Enemy(this.r.Next(20, 500), this.r.Next(20, 450)));
             }

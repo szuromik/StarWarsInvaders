@@ -49,11 +49,11 @@
             }
         }
 
-        public static void DrawEnemies(DrawingContext drawingContext, GameLogic vm)
+        public static void DrawEnemies(List<ImageBrush> enemyList, DrawingContext drawingContext, GameLogic vm)
         {
             foreach (Enemy enemy in vm.EnemyList)
             {
-                drawingContext.DrawRectangle(Brushes.Azure, new Pen(Brushes.Black, 1), new Rect(enemy.EnemyPoint.X, enemy.EnemyPoint.Y, enemy.Shape.Width, enemy.Shape.Height));
+                drawingContext.DrawRectangle(enemyList[0], new Pen(Brushes.Black, 1), new Rect(enemy.EnemyPoint.X, enemy.EnemyPoint.Y, enemy.Shape.Width, enemy.Shape.Height));
             }
         }
 
@@ -91,18 +91,35 @@
 
         public static void DrawControlMenu(DrawingContext drawingContext, GameLogic vm)
         {
+            string text = "A játékban az ezeréves solymot tudod irányítani.\n-Mozgáshoz használd a jobbra-balra nyilat\n-Lövés - Space billentyű.\n-Két fegyver közötti váltáshoz - Jobb vagy Bal Shift.";
             drawingContext.DrawText(
                     new FormattedText(
-                        "Ez lenni control menü",
+                        text,
                     System.Globalization.CultureInfo.CurrentCulture,
                     FlowDirection.LeftToRight, new Typeface(
                         new FontFamily("Arial"),
                         FontStyles.Normal,
                         FontWeights.Bold,
                         FontStretches.Normal),
-                        14,
+                        15,
                         Brushes.White),
                         new Point(10, 10));
+        }
+
+        public static void DrawPlayerLifeScore(DrawingContext drawingContext, GameLogic vm)
+        {
+            drawingContext.DrawText(
+                    new FormattedText(
+                        vm.Player.LifeScore.ToString(),
+                    System.Globalization.CultureInfo.CurrentCulture,
+                    FlowDirection.LeftToRight, new Typeface(
+                        new FontFamily("Arial"),
+                        FontStyles.Normal,
+                        FontWeights.Bold,
+                        FontStretches.Normal),
+                        15,
+                        Brushes.White),
+                        new Point(vm.Player.PlayerPoint.X,vm.Player.PlayerPoint.Y));
         }
     }
 }

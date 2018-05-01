@@ -15,10 +15,7 @@ namespace Star_Wars_Invaders
         // there will be brushes
         private ImageBrush playerBrush;
         private ImageBrush backgroundBrush;
-        private ImageBrush enemy1; // need to Initalize
-        private ImageBrush enemy2;
-        private ImageBrush enemy3;
-        private ImageBrush enemy4;
+        private List<ImageBrush> enemies;
         private GameLogic vm;
 
         public void Init(GameLogic vm)
@@ -26,6 +23,10 @@ namespace Star_Wars_Invaders
             this.vm = vm;
             this.playerBrush = new ImageBrush(new BitmapImage(new Uri("Pics\\Player.png", UriKind.Relative)));
             this.backgroundBrush = new ImageBrush(new BitmapImage(new Uri("Pics\\space.jpg", UriKind.Relative)));
+            this.enemies = new List<ImageBrush>();
+            this.enemies.Add(new ImageBrush(new BitmapImage(new Uri("Pics\\boss1.png", UriKind.Relative))));
+            this.enemies.Add(new ImageBrush(new BitmapImage(new Uri("Pics\\boss2.png", UriKind.Relative))));
+            this.enemies.Add(new ImageBrush(new BitmapImage(new Uri("Pics\\boss3.png", UriKind.Relative))));
         }
 
         protected override void OnRender(DrawingContext drawingContext)
@@ -54,8 +55,9 @@ namespace Star_Wars_Invaders
                 {
                     drawingContext.DrawRectangle(this.playerBrush, null, new Rect(this.vm.Player.PlayerPoint.X, this.vm.Player.PlayerPoint.Y, 60, 100));
                     DrawingContextHelp.DrawPlayerBullets(drawingContext, this.vm);
-                    DrawingContextHelp.DrawEnemies(drawingContext, this.vm);
+                    DrawingContextHelp.DrawEnemies(this.enemies, drawingContext, this.vm);
                     DrawingContextHelp.DrawPlayerScore(drawingContext, this.vm);
+                    DrawingContextHelp.DrawPlayerLifeScore(drawingContext, this.vm);
                 }
             }
         }

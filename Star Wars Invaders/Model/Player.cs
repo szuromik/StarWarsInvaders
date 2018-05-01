@@ -10,6 +10,7 @@
         private BulletType actualType;
         private Rect shape;
         private int score;
+        private int lifeScore;
 
         public Player(double x, double y)
         {
@@ -18,6 +19,7 @@
             this.actualType = BulletType.Simple;
             this.shape = new Rect(x, y, 50, 50);
             this.score = 0;
+            this.lifeScore = 10;
         }
 
         public Point PlayerPoint
@@ -69,6 +71,19 @@
             set
             {
                 this.score = value;
+            }
+        }
+
+        public int LifeScore
+        {
+            get
+            {
+                return lifeScore;
+            }
+
+            set
+            {
+                lifeScore = value;
             }
         }
 
