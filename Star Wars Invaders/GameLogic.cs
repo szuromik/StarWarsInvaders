@@ -137,6 +137,12 @@
             {
                 this.MainMenu.ChooseMenuElement();
             }
+
+            if (e == Key.Escape)
+            {
+                this.MainMenu.LeaderBoardActive = false;
+                this.mainMenu.ControlMenuElementActive = false;
+            }
         }
 
         private void Move()

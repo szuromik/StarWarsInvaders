@@ -13,6 +13,9 @@
         private bool isMenuInactive;
         private int choosenMenuElement;
         private bool exit;
+        private bool leaderBoardActive;
+        private bool controlMenuElementActive;
+        private bool gameActive;
 
         public Menu()
         {
@@ -76,6 +79,45 @@
             }
         }
 
+        public bool LeaderBoardActive
+        {
+            get
+            {
+                return this.leaderBoardActive;
+            }
+
+            set
+            {
+                this.leaderBoardActive = value;
+            }
+        }
+
+        public bool ControlMenuElementActive
+        {
+            get
+            {
+                return this.controlMenuElementActive;
+            }
+
+            set
+            {
+                this.controlMenuElementActive = value;
+            }
+        }
+
+        public bool GameActive
+        {
+            get
+            {
+                return this.gameActive;
+            }
+
+            set
+            {
+                this.gameActive = value;
+            }
+        }
+
         public void MenuDown()
         {
             if (this.choosenMenuElement + 1 < this.menuElements.Count)
@@ -96,7 +138,9 @@
         {
             switch (this.choosenMenuElement)
             {
-                case 0: this.isMenuInactive = true; break;
+                case 0: this.gameActive = true; break;
+                case 1: this.controlMenuElementActive = true; break;
+                case 2: this.leaderBoardActive = true; break;
                 case 3: this.exit = true; break;
             }
         }

@@ -6,18 +6,8 @@
     using System.Text;
     using System.Threading.Tasks;
 
-    class Scores
+    public class Scores
     {
-        private List<int> scores;
-
-        public void Save()
-        {
-            // It will save the points
-        }
-
-        public void Load()
-        {
-            // It will Load point to LeaderBoard menuelement
-        }
+        // Some Code Here
     }
 }

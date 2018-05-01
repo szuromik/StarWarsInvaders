@@ -72,5 +72,37 @@
                         Brushes.White),
                         new Point(10, 10));
         }
+
+        public static void DrawLeaderBoard(DrawingContext drawingContext, GameLogic vm)
+        {
+            drawingContext.DrawText(
+                    new FormattedText(
+                        "Ez lenni LeaderBoard",
+                    System.Globalization.CultureInfo.CurrentCulture,
+                    FlowDirection.LeftToRight, new Typeface(
+                        new FontFamily("Arial"),
+                        FontStyles.Normal,
+                        FontWeights.Bold,
+                        FontStretches.Normal),
+                        14,
+                        Brushes.White),
+                        new Point(10, 10));
+        }
+
+        public static void DrawControlMenu(DrawingContext drawingContext, GameLogic vm)
+        {
+            drawingContext.DrawText(
+                    new FormattedText(
+                        "Ez lenni control menü",
+                    System.Globalization.CultureInfo.CurrentCulture,
+                    FlowDirection.LeftToRight, new Typeface(
+                        new FontFamily("Arial"),
+                        FontStyles.Normal,
+                        FontWeights.Bold,
+                        FontStretches.Normal),
+                        14,
+                        Brushes.White),
+                        new Point(10, 10));
+        }
     }
 }

@@ -33,9 +33,22 @@ namespace Star_Wars_Invaders
             if (this.vm != null)
             {
                 drawingContext.DrawRectangle(this.backgroundBrush, null, new Rect(0, 0, this.ActualWidth, this.ActualHeight));
-                if (!this.vm.MainMenu.IsMenuInactive)
+                if (!this.vm.MainMenu.GameActive)
                 {
-                    DrawingContextHelp.DrawMenu(drawingContext, this.vm);
+                    if (!this.vm.MainMenu.IsMenuInactive && !this.vm.MainMenu.ControlMenuElementActive && !this.vm.MainMenu.LeaderBoardActive)
+                    {
+                        DrawingContextHelp.DrawMenu(drawingContext, this.vm);
+                    }
+
+                    else if (this.vm.MainMenu.ControlMenuElementActive)
+                    {
+                        DrawingContextHelp.DrawControlMenu(drawingContext, this.vm);
+                    }
+
+                    else
+                    {
+                        DrawingContextHelp.DrawLeaderBoard(drawingContext, this.vm);
+                    }
                 }
                 else
                 {
