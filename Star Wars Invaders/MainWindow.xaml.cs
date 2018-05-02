@@ -25,17 +25,21 @@ namespace Star_Wars_Invaders
 
         private void Timer_Tick(object sender, EventArgs e)
         {
+
             if (!this.vm.MainMenu.Exit)
             {
-                this.vm.GenerateEnemy();
-                this.vm.DoTurn();
-                this.Jatekter.InvalidateVisual();
-                if (this.tickCounting % 20 == 0)
+                if (!this.vm.GameOver)
                 {
-                    this.vm.Player.Score++;
-                }
+                    this.vm.GenerateEnemy();
+                    this.vm.DoTurn();
+                    this.Jatekter.InvalidateVisual();
+                    if (this.tickCounting % 20 == 0)
+                    {
+                        this.vm.Player.Score++;
+                    }
 
-                this.tickCounting++;
+                    this.tickCounting++;
+                }
             }
             else
             {

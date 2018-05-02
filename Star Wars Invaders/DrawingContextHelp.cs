@@ -26,11 +26,12 @@
 
                 drawingContext.DrawText(
                 new FormattedText(
-                    vm.MainMenu.MenuElements[i].ToString(),
+                vm.MainMenu.MenuElements[i].ToString(),
                 System.Globalization.CultureInfo.CurrentCulture,
                 FlowDirection.LeftToRight,
-                    new Typeface(new FontFamily("Arial"), FontStyles.Normal, FontWeights.Bold, FontStretches.Normal), 24, menuElementColor),
-                    new Point(200, (i * 50) + 200));
+                new Typeface(new FontFamily("Arial"), FontStyles.Normal, FontWeights.Bold, FontStretches.Normal), 
+                24,
+                menuElementColor), new Point(200, (i * 50) + 200));
             }
         }
 
@@ -120,6 +121,19 @@
                     new Typeface(new FontFamily("Arial"), FontStyles.Normal, FontWeights.Bold, FontStretches.Normal),
                     15,
                     Brushes.White), new Point(10, 10));
+        }
+
+        public static void DrawGameOver(DrawingContext drawingContext, GameLogic vm)
+        {
+            string text = "Game Over";
+            drawingContext.DrawText(
+                    new FormattedText(
+                        text,
+                    System.Globalization.CultureInfo.CurrentCulture,
+                    FlowDirection.LeftToRight,
+                    new Typeface(new FontFamily("Arial"), FontStyles.Normal, FontWeights.Bold, FontStretches.Normal),
+                    50,
+                    Brushes.Red), new Point(130, vm.Size.Height / 2));
         }
 
         public static void DrawPlayerLifeScore(DrawingContext drawingContext, GameLogic vm)

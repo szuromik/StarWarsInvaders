@@ -59,6 +59,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Page Include="leaderBoardWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -68,6 +72,9 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="DrawingContextHelp.cs" />
+    <Compile Include="leaderBoardWindow.xaml.cs">
+      <DependentUpon>leaderBoardWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Model\Menu.cs" />
     <Compile Include="Model\Bullet.cs" />
     <Compile Include="Model\Enemy.cs" />

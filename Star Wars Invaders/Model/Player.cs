@@ -19,7 +19,7 @@
             this.actualType = BulletType.Simple;
             this.Shape = new Rect(x, y, 50, 50);
             this.score = 0;
-            this.lifeScore = 10;
+            this.lifeScore = 2;
         }
 
         public Point PlayerPoint

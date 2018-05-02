@@ -51,20 +51,18 @@ namespace Star_Wars_Invaders
                 }
                 else
                 {
-                    if (!this.vm.GameOver)
-                    {
+                      if (this.vm.GameOver)
+                        {
+                        DrawingContextHelp.DrawGameOver(drawingContext, this.vm);
+                        this.InvalidateVisual();
+                        }
+
                         drawingContext.DrawRectangle(this.playerBrush, null, new Rect(this.vm.Player.PlayerPoint.X, this.vm.Player.PlayerPoint.Y, 60, 100));
                         DrawingContextHelp.DrawPlayerBullets(drawingContext, this.vm);
                         DrawingContextHelp.DrawEnemies(this.enemies, drawingContext, this.vm);
                         DrawingContextHelp.DrawEnemyLifeScore(drawingContext, this.vm);
                         DrawingContextHelp.DrawPlayerScore(drawingContext, this.vm);
                         DrawingContextHelp.DrawPlayerLifeScore(drawingContext, this.vm);
-                    }
-
-                    else
-                    {
-                        MessageBox.Show("Beszoptad");
-                    }
                 }
             }
         }

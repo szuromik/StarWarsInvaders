@@ -15,17 +15,15 @@
         private List<Bullet> bulletsToDelete;
         private List<Enemy> enemyList;
         private Random r = new Random();
-        private bool gameEnd;
         private List<Enemy> enemyToDelete;
         private Menu mainMenu;
         private bool gameOver;
+        private List<Scores> playerScores;
 
         public GameLogic(Size size)
         {
-            this.size = size;
-            this.player = new Player(this.size.Width / 2, this.size.Height - 100);
-            this.enemyList = new List<Enemy>();
-            this.mainMenu = new Menu();
+            this.Size = size;
+            this.ToStartState();
         }
 
         public Player Player
@@ -38,19 +36,6 @@
             set
             {
                 this.player = value;
-            }
-        }
-
-        public bool GameEnd
-        {
-            get
-            {
-                return this.gameEnd;
-            }
-
-            set
-            {
-                this.gameEnd = value;
             }
         }
 
@@ -67,6 +52,14 @@
             }
         }
 
+        private void ToStartState()
+        {
+            this.player = new Player(this.size.Width / 2, this.size.Height - 100);
+            this.enemyList = new List<Enemy>();
+            this.mainMenu = new Menu();
+            this.playerScores = new List<Scores>();
+        }
+
         public Menu MainMenu
         {
             get
@@ -79,12 +72,25 @@
         {
             get
             {
-                return gameOver;
+                return this.gameOver;
             }
 
             set
             {
-                gameOver = value;
+                this.gameOver = value;
+            }
+        }
+
+        public Size Size
+        {
+            get
+            {
+                return this.size;
+            }
+
+            set
+            {
+                this.size = value;
             }
         }
 
@@ -101,14 +107,17 @@
 
         public void DoTurn()
         {
-            this.Move();
-            this.PlayerBullettCollideWithEnemy();
-            this.FindInactiveEnemies();
-            this.FindInactiveBullet(this.Player.Bullets);
-            this.EnemyCollideWithPlayer();
-            if (this.Player.LifeScore <= 0)
+            if (this.mainMenu.GameActive)
             {
-                this.gameOver = true;
+                this.Move();
+                this.PlayerBullettCollideWithEnemy();
+                this.FindInactiveEnemies();
+                this.FindInactiveBullet(this.Player.Bullets);
+                this.EnemyCollideWithPlayer();
+                if (this.Player.LifeScore <= 0)
+                {
+                    this.gameOver = true;
+                }
             }
         }
 
@@ -161,7 +170,18 @@
 
             if (e == Key.Enter)
             {
-                this.MainMenu.ChooseMenuElement();
+                if (this.gameOver)
+                {
+                    LeaderBoardWindow leaderBoardWindow = new LeaderBoardWindow(this.Player.Score);
+                    leaderBoardWindow.ShowDialog();
+                    this.playerScores.Add(leaderBoardWindow.Score);
+                    this.ToStartState();
+                    this.gameOver = false;
+                }
+                else
+                {
+                    this.MainMenu.ChooseMenuElement();
+                }
             }
 
             if (e == Key.Escape)
@@ -169,6 +189,11 @@
                 this.MainMenu.LeaderBoardActive = false;
                 this.mainMenu.ControlMenuElementActive = false;
             }
+        }
+
+        private void LofaszAPicsadba()
+        {
+            this.gameOver = false;
         }
 
         private void Move()
