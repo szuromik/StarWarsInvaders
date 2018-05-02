@@ -27,9 +27,10 @@ namespace Star_Wars_Invaders
         {
             if (!this.vm.MainMenu.Exit)
             {
+                this.vm.GenerateEnemy();
                 this.vm.DoTurn();
                 this.Jatekter.InvalidateVisual();
-                if (this.tickCounting % 40 == 0)
+                if (this.tickCounting % 20 == 0)
                 {
                     this.vm.Player.Score++;
                 }

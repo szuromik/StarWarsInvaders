@@ -53,7 +53,20 @@
         {
             foreach (Enemy enemy in vm.EnemyList)
             {
-                drawingContext.DrawRectangle(enemyList[0], new Pen(Brushes.Black, 1), new Rect(enemy.EnemyPoint.X, enemy.EnemyPoint.Y, enemy.Shape.Width, enemy.Shape.Height));
+                if (enemy.Type == EnemyType.Easy)
+                {
+                    drawingContext.DrawRectangle(enemyList[0], null, new Rect(enemy.EnemyPoint.X, enemy.EnemyPoint.Y, enemy.Shape.Width, enemy.Shape.Height));
+                }
+
+                if (enemy.Type == EnemyType.Medium)
+                {
+                    drawingContext.DrawRectangle(enemyList[1], null, new Rect(enemy.EnemyPoint.X, enemy.EnemyPoint.Y, enemy.Shape.Width, enemy.Shape.Height));
+                }
+
+                if (enemy.Type == EnemyType.Hard)
+                {
+                    drawingContext.DrawRectangle(enemyList[2], null, new Rect(enemy.EnemyPoint.X, enemy.EnemyPoint.Y, enemy.Shape.Width, enemy.Shape.Height));
+                }
             }
         }
 
@@ -63,14 +76,25 @@
                     new FormattedText(
                         vm.Player.Score.ToString(),
                     System.Globalization.CultureInfo.CurrentCulture,
-                    FlowDirection.LeftToRight, new Typeface(
-                        new FontFamily("Arial"),
-                        FontStyles.Normal,
-                        FontWeights.Bold,
-                        FontStretches.Normal),
+                    FlowDirection.LeftToRight,
+                    new Typeface(new FontFamily("Arial"), FontStyles.Normal, FontWeights.Bold, FontStretches.Normal),
+                    14,
+                    Brushes.White), new Point(10, 10));
+        }
+
+        public static void DrawEnemyLifeScore(DrawingContext drawingContext, GameLogic vm)
+        {
+            foreach (Enemy enemy in vm.EnemyList)
+            {
+                drawingContext.DrawText(
+                        new FormattedText(
+                            enemy.LifeScore.ToString(),
+                        System.Globalization.CultureInfo.CurrentCulture,
+                        FlowDirection.LeftToRight,
+                        new Typeface(new FontFamily("Arial"), FontStyles.Normal, FontWeights.Bold, FontStretches.Normal),
                         14,
-                        Brushes.White),
-                        new Point(10, 10));
+                        Brushes.White), new Point(enemy.EnemyPoint.X, enemy.EnemyPoint.Y));
+            }
         }
 
         public static void DrawLeaderBoard(DrawingContext drawingContext, GameLogic vm)
@@ -79,47 +103,35 @@
                     new FormattedText(
                         "Ez lenni LeaderBoard",
                     System.Globalization.CultureInfo.CurrentCulture,
-                    FlowDirection.LeftToRight, new Typeface(
-                        new FontFamily("Arial"),
-                        FontStyles.Normal,
-                        FontWeights.Bold,
-                        FontStretches.Normal),
-                        14,
-                        Brushes.White),
-                        new Point(10, 10));
+                    FlowDirection.LeftToRight,
+                    new Typeface(new FontFamily("Arial"), FontStyles.Normal, FontWeights.Bold, FontStretches.Normal),
+                    14,
+                    Brushes.White), new Point(10, 10));
         }
 
-        public static void DrawControlMenu(DrawingContext drawingContext, GameLogic vm)
+        public static void DrawControlMenu(DrawingContext drawingContext)
         {
             string text = "A játékban az ezeréves solymot tudod irányítani.\n-Mozgáshoz használd a jobbra-balra nyilat\n-Lövés - Space billentyű.\n-Két fegyver közötti váltáshoz - Jobb vagy Bal Shift.";
             drawingContext.DrawText(
                     new FormattedText(
                         text,
                     System.Globalization.CultureInfo.CurrentCulture,
-                    FlowDirection.LeftToRight, new Typeface(
-                        new FontFamily("Arial"),
-                        FontStyles.Normal,
-                        FontWeights.Bold,
-                        FontStretches.Normal),
-                        15,
-                        Brushes.White),
-                        new Point(10, 10));
+                    FlowDirection.LeftToRight,
+                    new Typeface(new FontFamily("Arial"), FontStyles.Normal, FontWeights.Bold, FontStretches.Normal),
+                    15,
+                    Brushes.White), new Point(10, 10));
         }
 
         public static void DrawPlayerLifeScore(DrawingContext drawingContext, GameLogic vm)
         {
             drawingContext.DrawText(
                     new FormattedText(
-                        vm.Player.LifeScore.ToString(),
+                    vm.Player.LifeScore.ToString(),
                     System.Globalization.CultureInfo.CurrentCulture,
-                    FlowDirection.LeftToRight, new Typeface(
-                        new FontFamily("Arial"),
-                        FontStyles.Normal,
-                        FontWeights.Bold,
-                        FontStretches.Normal),
-                        15,
-                        Brushes.White),
-                        new Point(vm.Player.PlayerPoint.X,vm.Player.PlayerPoint.Y));
+                    FlowDirection.LeftToRight,
+                    new Typeface(new FontFamily("Arial"), FontStyles.Normal, FontWeights.Bold, FontStretches.Normal),
+                    15,
+                    Brushes.White), new Point(vm.Player.PlayerPoint.X, vm.Player.PlayerPoint.Y));
         }
     }
 }

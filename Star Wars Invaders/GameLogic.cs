@@ -18,17 +18,13 @@
         private bool gameEnd;
         private List<Enemy> enemyToDelete;
         private Menu mainMenu;
+        private bool gameOver;
 
         public GameLogic(Size size)
         {
             this.size = size;
             this.player = new Player(this.size.Width / 2, this.size.Height - 100);
             this.enemyList = new List<Enemy>();
-            for (int i = 0; i < 20; i++)
-            {
-                this.enemyList.Add(new Enemy(this.r.Next(20, 500), this.r.Next(20, 450)));
-            }
-
             this.mainMenu = new Menu();
         }
 
@@ -79,18 +75,48 @@
             }
         }
 
+        public bool GameOver
+        {
+            get
+            {
+                return gameOver;
+            }
+
+            set
+            {
+                gameOver = value;
+            }
+        }
+
+        public void GenerateEnemy()
+        {
+            if (this.enemyList.Count < 4)
+            {
+                for (int i = 0; i < 2; i++)
+                {
+                    this.enemyList.Add(new Enemy(this.r.Next(20, 490), 0, EnemyType.Easy));
+                }
+            }
+        }
+
         public void DoTurn()
         {
             this.Move();
             this.PlayerBullettCollideWithEnemy();
+            this.FindInactiveEnemies();
             this.FindInactiveBullet(this.Player.Bullets);
+            this.EnemyCollideWithPlayer();
+            if (this.Player.LifeScore <= 0)
+            {
+                this.gameOver = true;
+            }
         }
 
         public void Billentyunyomas(Key e)
         {
             if (e == Key.Left)
             {
-                int value = -10;
+                int value = -20;
                 if (this.Player.PlayerPoint.X + value > 0)
                 {
                     this.Player.Move(value);
@@ -103,7 +129,7 @@
 
             if (e == Key.Right)
             {
-                int value = 10;
+                int value = 20;
                 if (this.Player.PlayerPoint.X + 60 + value < this.size.Width)
                 {
                     this.Player.Move(value);
@@ -151,6 +177,11 @@
             {
                 item.MovePlayerBullets();
             }
+
+            foreach (Enemy item in this.enemyList)
+            {
+                item.Move();
+            }
         }
 
         private void FindInactiveBullet(List<Bullet> bulletToInvestigate) // Ez fogja megtalálni és kitörölni azon a lövedékeket amelyek elhagyták a pályát
@@ -170,6 +201,23 @@
             foreach (Bullet item in this.bulletsToDelete)
             {
                 bulletToInvestigate.Remove(item);
+            }
+        }
+
+        private void FindInactiveEnemies()
+        {
+            this.enemyToDelete = new List<Enemy>();
+            foreach (Enemy enemy in this.enemyList)
+            {
+                if (enemy.EnemyPoint.Y > this.size.Height)
+                {
+                    this.enemyToDelete.Add(enemy);
+                }
+            }
+
+            foreach (Enemy enemy in this.enemyToDelete)
+            {
+                this.enemyList.Remove(enemy);
             }
         }
 
@@ -202,6 +250,24 @@
         private void PlayerCollisionWithPickableElement()
         {
             // Some Code Here
+        }
+
+        private void EnemyCollideWithPlayer()
+        {
+            this.enemyToDelete = new List<Enemy>();
+            foreach (Enemy enemy in this.enemyList)
+            {
+                if (enemy.Shape.IntersectsWith(this.Player.Shape))
+                {
+                    this.enemyToDelete.Add(enemy);
+                }
+            }
+
+            foreach (Enemy enemy in this.enemyToDelete)
+            {
+                this.enemyList.Remove(enemy);
+                this.Player.Damage();
+            }
         }
     }
 }

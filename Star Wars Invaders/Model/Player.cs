@@ -17,7 +17,7 @@
             this.playerPoint = new Point(x, y);
             this.Bullets = new List<Bullet>();
             this.actualType = BulletType.Simple;
-            this.shape = new Rect(x, y, 50, 50);
+            this.Shape = new Rect(x, y, 50, 50);
             this.score = 0;
             this.lifeScore = 10;
         }
@@ -78,12 +78,25 @@
         {
             get
             {
-                return lifeScore;
+                return this.lifeScore;
             }
 
             set
             {
-                lifeScore = value;
+                this.lifeScore = value;
+            }
+        }
+
+        public Rect Shape
+        {
+            get
+            {
+                return this.shape;
+            }
+
+            set
+            {
+                this.shape = value;
             }
         }
 
@@ -108,6 +121,11 @@
             {
                 this.actualType = BulletType.Laser;
             }
+        }
+
+        public void Damage()
+        {
+            this.lifeScore--;
         }
     }
 }

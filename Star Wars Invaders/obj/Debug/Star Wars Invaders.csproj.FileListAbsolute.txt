@@ -1,3 +1,6 @@
+C:\Users\Kristof\Documents\Visual Studio 2015\Projects\Star Wars Invaders\Star Wars Invaders\bin\Debug\Pics\boss1.png
+C:\Users\Kristof\Documents\Visual Studio 2015\Projects\Star Wars Invaders\Star Wars Invaders\bin\Debug\Pics\boss2.png
+C:\Users\Kristof\Documents\Visual Studio 2015\Projects\Star Wars Invaders\Star Wars Invaders\bin\Debug\Pics\boss3.png
 C:\Users\Kristof\Documents\Visual Studio 2015\Projects\Star Wars Invaders\Star Wars Invaders\bin\Debug\Pics\Player.png
 C:\Users\Kristof\Documents\Visual Studio 2015\Projects\Star Wars Invaders\Star Wars Invaders\bin\Debug\Pics\space.jpg
 C:\Users\Kristof\Documents\Visual Studio 2015\Projects\Star Wars Invaders\Star Wars Invaders\bin\Debug\Star Wars Invaders.exe.config
@@ -15,6 +18,3 @@ C:\Users\Kristof\Documents\Visual Studio 2015\Projects\Star Wars Invaders\Star W
 C:\Users\Kristof\Documents\Visual Studio 2015\Projects\Star Wars Invaders\Star Wars Invaders\obj\Debug\Star Wars Invaders.csproj.GenerateResource.Cache
 C:\Users\Kristof\Documents\Visual Studio 2015\Projects\Star Wars Invaders\Star Wars Invaders\obj\Debug\Star Wars Invaders.exe
 C:\Users\Kristof\Documents\Visual Studio 2015\Projects\Star Wars Invaders\Star Wars Invaders\obj\Debug\Star Wars Invaders.pdb
-C:\Users\Kristof\Documents\Visual Studio 2015\Projects\Star Wars Invaders\Star Wars Invaders\bin\Debug\Pics\boss1.png
-C:\Users\Kristof\Documents\Visual Studio 2015\Projects\Star Wars Invaders\Star Wars Invaders\bin\Debug\Pics\boss2.png
-C:\Users\Kristof\Documents\Visual Studio 2015\Projects\Star Wars Invaders\Star Wars Invaders\bin\Debug\Pics\boss3.png

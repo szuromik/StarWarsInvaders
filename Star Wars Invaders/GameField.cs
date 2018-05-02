@@ -40,12 +40,10 @@ namespace Star_Wars_Invaders
                     {
                         DrawingContextHelp.DrawMenu(drawingContext, this.vm);
                     }
-
                     else if (this.vm.MainMenu.ControlMenuElementActive)
                     {
-                        DrawingContextHelp.DrawControlMenu(drawingContext, this.vm);
+                        DrawingContextHelp.DrawControlMenu(drawingContext);
                     }
-
                     else
                     {
                         DrawingContextHelp.DrawLeaderBoard(drawingContext, this.vm);
@@ -53,11 +51,20 @@ namespace Star_Wars_Invaders
                 }
                 else
                 {
-                    drawingContext.DrawRectangle(this.playerBrush, null, new Rect(this.vm.Player.PlayerPoint.X, this.vm.Player.PlayerPoint.Y, 60, 100));
-                    DrawingContextHelp.DrawPlayerBullets(drawingContext, this.vm);
-                    DrawingContextHelp.DrawEnemies(this.enemies, drawingContext, this.vm);
-                    DrawingContextHelp.DrawPlayerScore(drawingContext, this.vm);
-                    DrawingContextHelp.DrawPlayerLifeScore(drawingContext, this.vm);
+                    if (!this.vm.GameOver)
+                    {
+                        drawingContext.DrawRectangle(this.playerBrush, null, new Rect(this.vm.Player.PlayerPoint.X, this.vm.Player.PlayerPoint.Y, 60, 100));
+                        DrawingContextHelp.DrawPlayerBullets(drawingContext, this.vm);
+                        DrawingContextHelp.DrawEnemies(this.enemies, drawingContext, this.vm);
+                        DrawingContextHelp.DrawEnemyLifeScore(drawingContext, this.vm);
+                        DrawingContextHelp.DrawPlayerScore(drawingContext, this.vm);
+                        DrawingContextHelp.DrawPlayerLifeScore(drawingContext, this.vm);
+                    }
+
+                    else
+                    {
+                        MessageBox.Show("Beszoptad");
+                    }
                 }
             }
         }
