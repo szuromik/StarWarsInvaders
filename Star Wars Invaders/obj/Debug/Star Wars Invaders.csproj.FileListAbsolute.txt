@@ -18,6 +18,5 @@ C:\Users\Kristof\Documents\Visual Studio 2015\Projects\Star Wars Invaders\Star W
 C:\Users\Kristof\Documents\Visual Studio 2015\Projects\Star Wars Invaders\Star Wars Invaders\obj\Debug\Star Wars Invaders.csproj.GenerateResource.Cache
 C:\Users\Kristof\Documents\Visual Studio 2015\Projects\Star Wars Invaders\Star Wars Invaders\obj\Debug\Star Wars Invaders.exe
 C:\Users\Kristof\Documents\Visual Studio 2015\Projects\Star Wars Invaders\Star Wars Invaders\obj\Debug\Star Wars Invaders.pdb
-C:\Users\Kristof\Documents\Visual Studio 2015\Projects\Star Wars Invaders\Star Wars Invaders\obj\Debug\Star Wars Invaders.csprojResolveAssemblyReference.cache
 C:\Users\Kristof\Documents\Visual Studio 2015\Projects\Star Wars Invaders\Star Wars Invaders\obj\Debug\leaderBoardWindow.g.cs
 C:\Users\Kristof\Documents\Visual Studio 2015\Projects\Star Wars Invaders\Star Wars Invaders\obj\Debug\leaderBoardWindow.baml

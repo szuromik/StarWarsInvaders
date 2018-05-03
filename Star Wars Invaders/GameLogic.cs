@@ -24,14 +24,15 @@
         private double makeItDifficult;
         private bool leaderBoardOpen;
 
-        public GameLogic(Size size)
+        public GameLogic(Size size) // GameLogic konstruktor. Elsődleges paraméter a size ez alapján fogja a játékost példányosítani
         {
             this.Size = size;
             this.playerScores = new List<Scores>();
             this.ToStartState();
+            this.ReadScore();
         }
 
-        public Player Player
+        public Player Player // írható olvasható tulajdonság a játékoshoz
         {
             get
             {
@@ -44,7 +45,7 @@
             }
         }
 
-        public List<Enemy> EnemyList
+        public List<Enemy> EnemyList // a pályán elhelyezkedő ellenségeket reprezentáló írható/olvasható tulajdonság
         {
             get
             {
@@ -57,7 +58,7 @@
             }
         }
 
-        public void ToStartState()
+        public void ToStartState() // Segédfüggvény. Nem átláthatatlan kódsor hanem egy különfüggvénybe ki van szervezve. Nagy szerepe van a ranglista utánni újbóli játéknál
         {
             this.player = new Player(this.size.Width / 2, this.size.Height - 100);
             this.enemyList = new List<Enemy>();
@@ -65,7 +66,7 @@
             this.makeItDifficult = 0;
         }
 
-        public Menu MainMenu
+        public Menu MainMenu // Egy menüt reprezentáló írható és olvasható tulajdonság
         {
             get
             {
@@ -73,7 +74,7 @@
             }
         }
 
-        public bool GameOver
+        public bool GameOver // Bool változó ami akkor lesz true ha az ellenfél megvan a pályán(elfogy az összes életpontja)
         {
             get
             {
@@ -86,7 +87,7 @@
             }
         }
 
-        public Size Size
+        public Size Size // Ez reprezentálja a játéktérnek a méretét
         {
             get
             {
@@ -99,7 +100,7 @@
             }
         }
 
-        public bool LeaderBoardOpen
+        public bool LeaderBoardOpen // Ha meghalunk a pályán akkor ez a változó true lesz, a főablak code behind-ba a következő ticknél megnyílik egy új ablak ahol be lehet írni magunkat a ranglistára
         {
             get
             {
@@ -271,6 +272,21 @@
             {
                 item.MovePlayerBullets();
             }
+        }
+
+        private void ReadScore()
+        {
+            StreamReader sr = new StreamReader("rekordok.txt");
+            while (!sr.EndOfStream)
+            {
+                string oneLine = sr.ReadLine();
+                string[] splitted = oneLine.Split(' ');
+                int scoreValue = int.Parse(splitted[1]);
+                Scores score = new Scores(splitted[0], scoreValue);
+                this.playerScores.Add(score);
+            }
+
+            sr.Close();
         }
 
         private void FindInactiveBullet(List<Bullet> bulletToInvestigate) // Ez fogja megtalálni és kitörölni azon a lövedékeket amelyek elhagyták a pályát

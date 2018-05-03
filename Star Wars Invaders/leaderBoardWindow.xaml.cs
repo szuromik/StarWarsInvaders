@@ -10,7 +10,7 @@
         public LeaderBoardWindow(int score)
         {
             this.InitializeComponent();
-            this.Score = new Scores(" ", score);
+            this.Score = new Scores(string.Empty, score);
             this.DataContext = this.Score;
         }
 

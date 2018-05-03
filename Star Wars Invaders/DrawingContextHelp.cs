@@ -100,14 +100,18 @@
 
         public static void DrawLeaderBoard(DrawingContext drawingContext, GameLogic vm)
         {
-            drawingContext.DrawText(
-                    new FormattedText(
-                        "Ez lenni LeaderBoard",
-                    System.Globalization.CultureInfo.CurrentCulture,
-                    FlowDirection.LeftToRight,
-                    new Typeface(new FontFamily("Arial"), FontStyles.Normal, FontWeights.Bold, FontStretches.Normal),
-                    14,
-                    Brushes.White), new Point(10, 10));
+            for (int i = 0; i <vm.PlayerScores.Count;i++)
+            {
+                string text = vm.PlayerScores[i].Name + "\t" + vm.PlayerScores[i].Score;
+                drawingContext.DrawText(
+                        new FormattedText(
+                            text,
+                        System.Globalization.CultureInfo.CurrentCulture,
+                        FlowDirection.LeftToRight,
+                        new Typeface(new FontFamily("Arial"), FontStyles.Normal, FontWeights.Bold, FontStretches.Normal),
+                        14,
+                        Brushes.White), new Point(10, 20 + (i * 10)));
+            }
         }
 
         public static void DrawControlMenu(DrawingContext drawingContext)

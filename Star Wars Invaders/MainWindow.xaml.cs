@@ -74,5 +74,10 @@ namespace Star_Wars_Invaders
             this.timer.Tick += this.Timer_Tick;
             this.timer.Start();
         }
+
+        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            this.vm.SaveScores();
+        }
     }
 }
