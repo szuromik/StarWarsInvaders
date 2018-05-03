@@ -16,7 +16,7 @@ namespace Star_Wars_Invaders
     {
         private GameLogic vm;
         private DispatcherTimer timer;
-        private int tickCounting;
+        private int tickCounting = 20;
 
         public MainWindow()
         {
@@ -26,19 +26,32 @@ namespace Star_Wars_Invaders
         private void Timer_Tick(object sender, EventArgs e)
         {
 
+            if (this.vm.LeaderBoardOpen)
+            {
+                LeaderBoardWindow leaderBoardWindow = new LeaderBoardWindow(this.vm.ActualScore());
+                leaderBoardWindow.ShowDialog();
+                this.vm.LeaderBoardOpen = false;
+                this.vm.ToStartState();
+                this.vm.PlayerScores.Add(leaderBoardWindow.Score);
+                this.vm.SaveScores();
+            }
+
             if (!this.vm.MainMenu.Exit)
             {
                 if (!this.vm.GameOver)
                 {
-                    this.vm.GenerateEnemy();
                     this.vm.DoTurn();
                     this.Jatekter.InvalidateVisual();
-                    if (this.tickCounting % 20 == 0)
+                    if (this.tickCounting == 0)
                     {
                         this.vm.Player.Score++;
+                        this.vm.EnemyControl();
+                        this.tickCounting = 20;
                     }
-
-                    this.tickCounting++;
+                    else
+                    {
+                        this.tickCounting--;
+                    }
                 }
             }
             else

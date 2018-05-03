@@ -2,8 +2,10 @@
 {
     using System;
     using System.Collections.Generic;
+    using System.IO;
     using System.Linq;
     using System.Text;
+    using System.Threading;
     using System.Threading.Tasks;
     using System.Windows;
     using System.Windows.Input;
@@ -19,10 +21,13 @@
         private Menu mainMenu;
         private bool gameOver;
         private List<Scores> playerScores;
+        private double makeItDifficult;
+        private bool leaderBoardOpen;
 
         public GameLogic(Size size)
         {
             this.Size = size;
+            this.playerScores = new List<Scores>();
             this.ToStartState();
         }
 
@@ -52,12 +57,12 @@
             }
         }
 
-        private void ToStartState()
+        public void ToStartState()
         {
             this.player = new Player(this.size.Width / 2, this.size.Height - 100);
             this.enemyList = new List<Enemy>();
             this.mainMenu = new Menu();
-            this.playerScores = new List<Scores>();
+            this.makeItDifficult = 0;
         }
 
         public Menu MainMenu
@@ -94,15 +99,65 @@
             }
         }
 
+        public bool LeaderBoardOpen
+        {
+            get
+            {
+                return this.leaderBoardOpen;
+            }
+
+            set
+            {
+                this.leaderBoardOpen = value;
+            }
+        }
+
+        public List<Scores> PlayerScores
+        {
+            get
+            {
+                return this.playerScores;
+            }
+
+            set
+            {
+                this.playerScores = value;
+            }
+        }
+
+        public void EnemyControl()
+        {
+            foreach (Enemy enemy in this.EnemyList)
+            {
+                    enemy.Move();
+                    enemy.Shoot();
+            }
+        }
+
         public void GenerateEnemy()
         {
-            if (this.enemyList.Count < 4)
+            EnemyType enemytypehelper = (EnemyType)this.r.Next(0, 3);
+            if (this.enemyList.Count < 4 + (int)this.makeItDifficult)
             {
-                for (int i = 0; i < 2; i++)
+                switch (enemytypehelper)
                 {
-                    this.enemyList.Add(new Enemy(this.r.Next(20, 490), 0, EnemyType.Easy));
+                    case EnemyType.Easy: this.enemyList.Add(new Enemy(this.r.Next(20, 490), 0, enemytypehelper)); break;
+                    case EnemyType.Medium: this.enemyList.Add(new Enemy(this.r.Next(20, 490), this.r.Next(0, 200), enemytypehelper)); break;
+                    case EnemyType.Hard: this.enemyList.Add(new Enemy(this.r.Next(20, 490), this.r.Next(0, 200), enemytypehelper)); break;
+                    default: return;
                 }
             }
+        }
+
+        public void SaveScores()
+        {
+            StreamWriter sw = new StreamWriter("Rekordok.txt");
+            for (int i = 0; i < this.playerScores.Count; i++)
+            {
+                sw.WriteLine(this.playerScores[i].Name + " " + this.playerScores[i].Score);
+            }
+
+            sw.Close();
         }
 
         public void DoTurn()
@@ -111,14 +166,35 @@
             {
                 this.Move();
                 this.PlayerBullettCollideWithEnemy();
+                this.GenerateEnemy();
                 this.FindInactiveEnemies();
                 this.FindInactiveBullet(this.Player.Bullets);
                 this.EnemyCollideWithPlayer();
+                this.EnemyBulletsCollisionWithPlayer();
+
                 if (this.Player.LifeScore <= 0)
                 {
                     this.gameOver = true;
                 }
+
+                foreach (Enemy enemy in this.EnemyList)
+                {
+                    foreach (Bullet bullet in enemy.Bullets)
+                    {
+                        bullet.MoveEnemyBullets();
+                    }
+                }
+
+                foreach (Enemy enemy in this.EnemyList)
+                {
+                    this.FindInactiveBullet(enemy.Bullets);
+                }
             }
+        }
+
+        public int ActualScore()
+        {
+            return this.player.Score;
         }
 
         public void Billentyunyomas(Key e)
@@ -152,6 +228,7 @@
             if (e == Key.LeftShift || e == Key.RightShift)
             {
                 this.Player.ChangeWeapon();
+                MessageBox.Show(this.makeItDifficult.ToString());
             }
             else if (e == Key.Space)
             {
@@ -172,11 +249,8 @@
             {
                 if (this.gameOver)
                 {
-                    LeaderBoardWindow leaderBoardWindow = new LeaderBoardWindow(this.Player.Score);
-                    leaderBoardWindow.ShowDialog();
-                    this.playerScores.Add(leaderBoardWindow.Score);
-                    this.ToStartState();
-                    this.gameOver = false;
+                    this.LeaderBoardOpen = true;
+                    this.GameOver = false;
                 }
                 else
                 {
@@ -191,21 +265,11 @@
             }
         }
 
-        private void LofaszAPicsadba()
-        {
-            this.gameOver = false;
-        }
-
         private void Move()
         {
             foreach (Bullet item in this.Player.Bullets)
             {
                 item.MovePlayerBullets();
-            }
-
-            foreach (Enemy item in this.enemyList)
-            {
-                item.Move();
             }
         }
 
@@ -249,13 +313,20 @@
         private void PlayerBullettCollideWithEnemy()
         {
             this.enemyToDelete = new List<Enemy>();
+            this.bulletsToDelete = new List<Bullet>();
             foreach (Bullet bullet in this.Player.Bullets)
             {
                 foreach (Enemy enemy in this.enemyList)
                 {
                     if (bullet.Shape.IntersectsWith(enemy.Shape))
                     {
-                        this.enemyToDelete.Add(enemy);
+                        enemy.LifeScore -= bullet.DamageLevel;
+                        if (enemy.LifeScore <= 0)
+                        {
+                            this.enemyToDelete.Add(enemy);
+                        }
+
+                        this.bulletsToDelete.Add(bullet);
                     }
                 }
             }
@@ -263,13 +334,42 @@
             foreach (Enemy enemy in this.enemyToDelete)
             {
                 this.enemyList.Remove(enemy);
-                this.player.Score += 10;
+                this.PointIncrease(10);
             }
+
+            foreach (Bullet bullet in this.bulletsToDelete)
+            {
+                this.Player.Bullets.Remove(bullet);
+            }
+        }
+
+        private void PointIncrease(int value)
+        {
+            this.Player.Score += value;
+            this.makeItDifficult += 0.05;
         }
 
         private void EnemyBulletsCollisionWithPlayer()
         {
-            // Some code here
+            foreach (Enemy enemy in this.enemyList)
+            {
+                foreach (Bullet bullet in enemy.Bullets)
+                {
+                    if (bullet.Shape.IntersectsWith(this.player.Shape))
+                    {
+                        this.player.LifeScore -= bullet.DamageLevel;
+                        this.bulletsToDelete.Add(bullet);
+                    }
+                }
+            }
+
+            foreach (Enemy enemy in this.enemyList)
+            {
+                foreach (Bullet bullet in this.bulletsToDelete)
+                {
+                    enemy.Bullets.Remove(bullet);
+                }
+            }
         }
 
         private void PlayerCollisionWithPickableElement()

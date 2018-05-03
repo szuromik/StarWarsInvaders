@@ -63,6 +63,13 @@ namespace Star_Wars_Invaders
                         DrawingContextHelp.DrawEnemyLifeScore(drawingContext, this.vm);
                         DrawingContextHelp.DrawPlayerScore(drawingContext, this.vm);
                         DrawingContextHelp.DrawPlayerLifeScore(drawingContext, this.vm);
+                    foreach (Enemy enemy in this.vm.EnemyList)
+                    {
+                        foreach (Bullet bullet in enemy.Bullets)
+                        {
+                            drawingContext.DrawEllipse(Brushes.Red, null, bullet.Location, 7, 5);
+                        }
+                    }
                 }
             }
         }

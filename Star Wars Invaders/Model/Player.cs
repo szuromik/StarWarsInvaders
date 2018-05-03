@@ -19,7 +19,7 @@
             this.actualType = BulletType.Simple;
             this.Shape = new Rect(x, y, 50, 50);
             this.score = 0;
-            this.lifeScore = 2;
+            this.lifeScore = 10;
         }
 
         public Point PlayerPoint
@@ -108,7 +108,8 @@
 
         public void Shoot()
         {
-            this.bullets.Add(new Bullet(new Point(this.PlayerPoint.X + 30, this.PlayerPoint.Y), this.actualType));
+            int damageLevel = 1;
+            this.bullets.Add(new Bullet(new Point(this.PlayerPoint.X + 30, this.PlayerPoint.Y), this.actualType, damageLevel));
         }
 
         public void ChangeWeapon()

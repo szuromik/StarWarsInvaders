@@ -13,7 +13,7 @@ namespace Star_Wars_Invaders
 
     public enum BulletType
     {
-        Simple, Laser
+        Simple, Laser, Imperial, ImperialLaser
     }
 
     public class Bullet
@@ -21,12 +21,16 @@ namespace Star_Wars_Invaders
         private Point location;
         private Rect shape;
         private BulletType bulletType;
+        private int damageLevel;
+        private int bulletVelocity;
 
-        public Bullet(Point location, BulletType bulletType)
+        public Bullet(Point location, BulletType bulletType, int damageLevel)
         {
             this.Location = location;
             this.Shape = new Rect(location.X, location.Y, 10, 10);
             this.bulletType = bulletType;
+            this.damageLevel = damageLevel;
+            this.InitalizeBulletVelocity();
         }
 
         public Point Location
@@ -68,10 +72,41 @@ namespace Star_Wars_Invaders
             }
         }
 
+        public int DamageLevel
+        {
+            get
+            {
+                return this.damageLevel;
+            }
+
+            set
+            {
+                this.damageLevel = value;
+            }
+        }
+
         public void MovePlayerBullets()
         {
-            this.location.Y -= 10;
-            this.shape.Y -= 10;
+            this.location.Y -= 10 * this.bulletVelocity;
+            this.shape.Y -= 10 * this.bulletVelocity;
+        }
+
+        public void MoveEnemyBullets()
+        {
+            this.location.Y += 10;
+            this.shape.Y += 10;
+        }
+
+        private void InitalizeBulletVelocity()
+        {
+            if (this.bulletType == BulletType.Simple || this.bulletType == BulletType.Imperial)
+            {
+                this.bulletVelocity = 1;
+            }
+            else
+            {
+                this.bulletVelocity = 2;
+            }
         }
     }
 }
