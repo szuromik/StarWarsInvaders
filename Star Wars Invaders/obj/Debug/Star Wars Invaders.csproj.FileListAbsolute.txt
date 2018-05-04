@@ -20,3 +20,5 @@ C:\Users\Kristof\Documents\Visual Studio 2015\Projects\Star Wars Invaders\Star W
 C:\Users\Kristof\Documents\Visual Studio 2015\Projects\Star Wars Invaders\Star Wars Invaders\obj\Debug\Star Wars Invaders.pdb
 C:\Users\Kristof\Documents\Visual Studio 2015\Projects\Star Wars Invaders\Star Wars Invaders\obj\Debug\leaderBoardWindow.g.cs
 C:\Users\Kristof\Documents\Visual Studio 2015\Projects\Star Wars Invaders\Star Wars Invaders\obj\Debug\leaderBoardWindow.baml
+C:\Users\Kristof\Documents\Visual Studio 2015\Projects\Star Wars Invaders\Star Wars Invaders\bin\Debug\Pics\yoda.png
+C:\Users\Kristof\Documents\Visual Studio 2015\Projects\Star Wars Invaders\Star Wars Invaders\bin\Debug\Pics\heart.png

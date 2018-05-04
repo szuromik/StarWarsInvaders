@@ -11,20 +11,20 @@ namespace Star_Wars_Invaders
     using System.Threading.Tasks;
     using System.Windows;
 
-    public enum BulletType
+    public enum BulletType // lőszertípus
     {
         Simple, Laser, Imperial, ImperialLaser
     }
 
     public class Bullet
     {
-        private Point location;
-        private Rect shape;
-        private BulletType bulletType;
-        private int damageLevel;
-        private int bulletVelocity;
+        private Point location; // lőszer helyzete
+        private Rect shape; // lőszer alakzata
+        private BulletType bulletType; // lőszer típusa
+        private int damageLevel; // lőszer sérőlés okozása
+        private int bulletVelocity; // lőszer gyorsaság
 
-        public Bullet(Point location, BulletType bulletType, int damageLevel)
+        public Bullet(Point location, BulletType bulletType, int damageLevel) // konstruktor egy lövedéknek
         {
             this.Location = location;
             this.Shape = new Rect(location.X, location.Y, 10, 10);
@@ -33,7 +33,7 @@ namespace Star_Wars_Invaders
             this.InitalizeBulletVelocity();
         }
 
-        public Point Location
+        public Point Location // tulajdonsága a helyzetnek
         {
             get
             {
@@ -46,7 +46,7 @@ namespace Star_Wars_Invaders
             }
         }
 
-        public Rect Shape
+        public Rect Shape // tulajdonság az alakzatnak
         {
             get
             {
@@ -59,7 +59,7 @@ namespace Star_Wars_Invaders
             }
         }
 
-        public BulletType BulletType
+        public BulletType BulletType // tulajdonság a lőszer típusának
         {
             get
             {
@@ -72,7 +72,7 @@ namespace Star_Wars_Invaders
             }
         }
 
-        public int DamageLevel
+        public int DamageLevel // tulajdonsága a lőszer sebzésének
         {
             get
             {
@@ -85,19 +85,19 @@ namespace Star_Wars_Invaders
             }
         }
 
-        public void MovePlayerBullets()
+        public void MovePlayerBullets() // Mozgató függvény a játékosnál
         {
             this.location.Y -= 10 * this.bulletVelocity;
             this.shape.Y -= 10 * this.bulletVelocity;
         }
 
-        public void MoveEnemyBullets()
+        public void MoveEnemyBullets() // mozgató függvény az ellenfélnél
         {
             this.location.Y += 10;
             this.shape.Y += 10;
         }
 
-        private void InitalizeBulletVelocity()
+        private void InitalizeBulletVelocity() // lőszergyorsaságot állít be 
         {
             if (this.bulletType == BulletType.Simple || this.bulletType == BulletType.Imperial)
             {

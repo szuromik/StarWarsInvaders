@@ -16,16 +16,17 @@ namespace Star_Wars_Invaders
     {
         private GameLogic vm;
         private DispatcherTimer timer;
-        private int tickCounting = 20;
+        private int shootCounting = 40;
+        private int moveCounting = 2;
+        private int immortalCount = 120;
 
-        public MainWindow()
+        public MainWindow() // Főablak konstruktora
         {
             this.InitializeComponent();
         }
 
-        private void Timer_Tick(object sender, EventArgs e)
+        private void Timer_Tick(object sender, EventArgs e) // Ebben található mit hív meg a DispactherTimer
         {
-
             if (this.vm.LeaderBoardOpen)
             {
                 LeaderBoardWindow leaderBoardWindow = new LeaderBoardWindow(this.vm.ActualScore());
@@ -42,15 +43,35 @@ namespace Star_Wars_Invaders
                 {
                     this.vm.DoTurn();
                     this.Jatekter.InvalidateVisual();
-                    if (this.tickCounting == 0)
+                    if (this.shootCounting == 0)
                     {
-                        this.vm.Player.Score++;
-                        this.vm.EnemyControl();
-                        this.tickCounting = 20;
+                        this.vm.EnemyShoot();
+                        this.shootCounting = 40;
                     }
                     else
                     {
-                        this.tickCounting--;
+                        this.shootCounting--;
+                    }
+
+                    if (this.moveCounting == 0)
+                    {
+                        this.vm.Player.Score++;
+                        this.vm.EnemyMove();
+                        this.moveCounting = 2;
+                    }
+                    else
+                    {
+                        this.moveCounting--;
+                    }
+
+                    if (this.vm.IsPlayerImmortal)
+                    {
+                        this.immortalCount--;
+                        if (this.immortalCount == 0)
+                        {
+                            this.vm.IsPlayerImmortal = false;
+                            this.immortalCount = 120;
+                        }
                     }
                 }
             }
@@ -60,12 +81,12 @@ namespace Star_Wars_Invaders
             }
         }
 
-        private void Window_KeyDown(object sender, System.Windows.Input.KeyEventArgs e)
+        private void Window_KeyDown(object sender, System.Windows.Input.KeyEventArgs e) // kezeli a billentyűlenyomást
         {
             this.vm.Billentyunyomas(e.Key);
         }
 
-        private void Window_Loaded(object sender, RoutedEventArgs e)
+        private void Window_Loaded(object sender, RoutedEventArgs e) // mi történjen az ablak betöltődése után
         {
             this.vm = new GameLogic(new Size(this.Jatekter.ActualWidth, this.Jatekter.ActualHeight));
             this.Jatekter.Init(this.vm);
@@ -75,7 +96,7 @@ namespace Star_Wars_Invaders
             this.timer.Start();
         }
 
-        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e) // mi történjen az ablak berázódásakor
         {
             this.vm.SaveScores();
         }

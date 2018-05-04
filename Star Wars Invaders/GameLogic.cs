@@ -23,6 +23,8 @@
         private List<Scores> playerScores;
         private double makeItDifficult;
         private bool leaderBoardOpen;
+        private List<PickableElement> pickableElementCollection;
+        private bool isPlayerImmortal;
 
         public GameLogic(Size size) // GameLogic konstruktor. Elsődleges paraméter a size ez alapján fogja a játékost példányosítani
         {
@@ -56,14 +58,6 @@
             {
                 this.enemyList = value;
             }
-        }
-
-        public void ToStartState() // Segédfüggvény. Nem átláthatatlan kódsor hanem egy különfüggvénybe ki van szervezve. Nagy szerepe van a ranglista utánni újbóli játéknál
-        {
-            this.player = new Player(this.size.Width / 2, this.size.Height - 100);
-            this.enemyList = new List<Enemy>();
-            this.mainMenu = new Menu();
-            this.makeItDifficult = 0;
         }
 
         public Menu MainMenu // Egy menüt reprezentáló írható és olvasható tulajdonság
@@ -126,16 +120,50 @@
             }
         }
 
-        public void EnemyControl()
+        public List<PickableElement> PickableElementCollection
+        {
+            get
+            {
+                return this.pickableElementCollection;
+            }
+
+            set
+            {
+                this.pickableElementCollection = value;
+            }
+        }
+
+        public bool IsPlayerImmortal
+        {
+            get
+            {
+                return this.player.Immortal;
+            }
+
+            set
+            {
+                this.player.Immortal = value;
+            }
+        }
+
+        public void EnemyShoot() // ellenség lövése
         {
             foreach (Enemy enemy in this.EnemyList)
             {
-                    enemy.Move();
                     enemy.Shoot();
             }
         }
 
-        public void GenerateEnemy()
+        public void ToStartState() // Segédfüggvény. Nem átláthatatlan kódsor hanem egy különfüggvénybe ki van szervezve. Nagy szerepe van a ranglista utánni újbóli játéknál
+        {
+            this.player = new Player(this.size.Width / 2, this.size.Height - 100);
+            this.enemyList = new List<Enemy>();
+            this.mainMenu = new Menu();
+            this.makeItDifficult = 0;
+            this.pickableElementCollection = new List<PickableElement>();
+        }
+
+        public void GenerateEnemy() // generálja az ellenfeleket
         {
             EnemyType enemytypehelper = (EnemyType)this.r.Next(0, 3);
             if (this.enemyList.Count < 4 + (int)this.makeItDifficult)
@@ -150,18 +178,18 @@
             }
         }
 
-        public void SaveScores()
+        public void SaveScores() // ez menti el a pontokat
         {
             StreamWriter sw = new StreamWriter("Rekordok.txt");
             for (int i = 0; i < this.playerScores.Count; i++)
             {
-                sw.WriteLine(this.playerScores[i].Name + " " + this.playerScores[i].Score);
+                sw.WriteLine(this.playerScores[i].Name + "#" + this.playerScores[i].Score);
             }
 
             sw.Close();
         }
 
-        public void DoTurn()
+        public void DoTurn() // osszefoglaló függvény hogy egy periódus alatt milyen függvények hívódjanak
         {
             if (this.mainMenu.GameActive)
             {
@@ -172,6 +200,10 @@
                 this.FindInactiveBullet(this.Player.Bullets);
                 this.EnemyCollideWithPlayer();
                 this.EnemyBulletsCollisionWithPlayer();
+                this.GeneratePickableElement();
+                this.MovePickableElement();
+                this.FindInactivePickableElement();
+                this.PlayerCollisionWithPickableElement();
 
                 if (this.Player.LifeScore <= 0)
                 {
@@ -196,9 +228,17 @@
         public int ActualScore()
         {
             return this.player.Score;
+        } // Az adott játszma alatt elért pontot visszaadó függvény
+
+        public void EnemyMove() // Ez mozgatja az ellensége
+        {
+            foreach (Enemy enemy in this.enemyList)
+            {
+                enemy.Move();
+            }
         }
 
-        public void Billentyunyomas(Key e)
+        public void Billentyunyomas(Key e) // Ezt a függvényt hívja meg a fő code behind ez kezeli a különböző billentyűnyomásokat
         {
             if (e == Key.Left)
             {
@@ -229,7 +269,6 @@
             if (e == Key.LeftShift || e == Key.RightShift)
             {
                 this.Player.ChangeWeapon();
-                MessageBox.Show(this.makeItDifficult.ToString());
             }
             else if (e == Key.Space)
             {
@@ -266,7 +305,25 @@
             }
         }
 
-        private void Move()
+        private void GeneratePickableElement() // generál felvehető elemet
+        {
+            PickableElementType type = (PickableElementType)this.r.Next(0, 2);
+            int seged = this.r.Next(0, 50);
+            if (seged > 48)
+            {
+                this.pickableElementCollection.Add(new PickableElement(this.r.Next(0, 450), 30, type));
+            }
+        }
+
+        private void MovePickableElement() // ez mozgatja a felvehető elemeket
+        {
+            foreach (PickableElement pick in this.PickableElementCollection)
+            {
+                pick.Move();
+            }
+        }
+
+        private void Move() // Ez mozgatja a játékos lövedékeit
         {
             foreach (Bullet item in this.Player.Bullets)
             {
@@ -274,13 +331,13 @@
             }
         }
 
-        private void ReadScore()
+        private void ReadScore() // segédfüggvény. Ez olvassa be a rekordok txt-t és ezt tölti be a ranglistába
         {
             StreamReader sr = new StreamReader("rekordok.txt");
             while (!sr.EndOfStream)
             {
                 string oneLine = sr.ReadLine();
-                string[] splitted = oneLine.Split(' ');
+                string[] splitted = oneLine.Split('#');
                 int scoreValue = int.Parse(splitted[1]);
                 Scores score = new Scores(splitted[0], scoreValue);
                 this.playerScores.Add(score);
@@ -309,7 +366,7 @@
             }
         }
 
-        private void FindInactiveEnemies()
+        private void FindInactiveEnemies() // Törli azokat az ellenségeket akik kimentek a pályáról. Ezt a könnyű ellenfeleknél kell detektálni
         {
             this.enemyToDelete = new List<Enemy>();
             foreach (Enemy enemy in this.enemyList)
@@ -326,7 +383,7 @@
             }
         }
 
-        private void PlayerBullettCollideWithEnemy()
+        private void PlayerBullettCollideWithEnemy() // detektálja hogy a lövésünk lelőtt-e egy ellenfelet. Ha igen a golyót is törli ha az ellenségnek elfogyott a pontja akkor őt is( de ha nem akkor csak sebzi)
         {
             this.enemyToDelete = new List<Enemy>();
             this.bulletsToDelete = new List<Bullet>();
@@ -359,13 +416,13 @@
             }
         }
 
-        private void PointIncrease(int value)
+        private void PointIncrease(int value) // Növeli a játékos pontját
         {
             this.Player.Score += value;
             this.makeItDifficult += 0.05;
         }
 
-        private void EnemyBulletsCollisionWithPlayer()
+        private void EnemyBulletsCollisionWithPlayer() // detekálja hogy kaptunk-e be találatot
         {
             foreach (Enemy enemy in this.enemyList)
             {
@@ -373,7 +430,7 @@
                 {
                     if (bullet.Shape.IntersectsWith(this.player.Shape))
                     {
-                        this.player.LifeScore -= bullet.DamageLevel;
+                        this.player.Damage(bullet.DamageLevel);
                         this.bulletsToDelete.Add(bullet);
                     }
                 }
@@ -388,12 +445,49 @@
             }
         }
 
-        private void PlayerCollisionWithPickableElement()
+        private void PlayerCollisionWithPickableElement() // detektálja és kezeli ha felvettünk egy boost elemet
         {
-            // Some Code Here
+            List<PickableElement> toDelete = new List<PickableElement>();
+            foreach (PickableElement pick in this.pickableElementCollection)
+            {
+                if (pick.Shape.IntersectsWith(this.player.Shape))
+                {
+                    toDelete.Add(pick);
+                    if (pick.PickType == PickableElementType.Life)
+                    {
+                        this.player.LifeScore += 5;
+                    }
+                    else
+                    {
+                        this.player.Immortal = true;
+                    }
+                }
+            }
+
+            foreach (PickableElement pick in toDelete)
+            {
+                this.pickableElementCollection.Remove(pick);
+            }
         }
 
-        private void EnemyCollideWithPlayer()
+        private void FindInactivePickableElement()
+        {
+            List<PickableElement> toDelete = new List<PickableElement>();
+            foreach (PickableElement pick in this.pickableElementCollection)
+            {
+                if (pick.Location.Y > this.size.Height)
+                {
+                    toDelete.Add(pick);
+                }
+            }
+
+            foreach (PickableElement pick in toDelete)
+            {
+                this.pickableElementCollection.Remove(pick);
+            }
+        }
+
+        private void EnemyCollideWithPlayer() // detektálja hogy a lezuhanó ellenfelek ütköztek-e velünk. ha igen sebesíti ha 0 az életpontja akkor törli
         {
             this.enemyToDelete = new List<Enemy>();
             foreach (Enemy enemy in this.enemyList)
@@ -407,7 +501,7 @@
             foreach (Enemy enemy in this.enemyToDelete)
             {
                 this.enemyList.Remove(enemy);
-                this.Player.Damage();
+                this.Player.Damage(1);
             }
         }
     }

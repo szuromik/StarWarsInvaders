@@ -8,9 +8,9 @@
     using System.Windows;
     using System.Windows.Media;
 
-    public static class DrawingContextHelp
+    public static class DrawingContextHelp // Segédosztály hogy az GameField Onrender oszályába átlátható legyen a kód
     {
-        public static void DrawMenu(DrawingContext drawingContext, GameLogic vm)
+        public static void DrawMenu(DrawingContext drawingContext, GameLogic vm) // kirajzolja a menüt
         {
             for (int i = 0; i < vm.MainMenu.MenuElements.Count; i++)
             {
@@ -29,13 +29,13 @@
                 vm.MainMenu.MenuElements[i].ToString(),
                 System.Globalization.CultureInfo.CurrentCulture,
                 FlowDirection.LeftToRight,
-                new Typeface(new FontFamily("Arial"), FontStyles.Normal, FontWeights.Bold, FontStretches.Normal), 
+                new Typeface(new FontFamily("Arial"), FontStyles.Normal, FontWeights.Bold, FontStretches.Normal),
                 24,
                 menuElementColor), new Point(200, (i * 50) + 200));
             }
         }
 
-        public static void DrawPlayerBullets(DrawingContext drawingContext, GameLogic vm)
+        public static void DrawPlayerBullets(DrawingContext drawingContext, GameLogic vm) // kirajzolja a játékos lövedékeit
         {
             foreach (Bullet item in vm.Player.Bullets)
             {
@@ -50,28 +50,28 @@
             }
         }
 
-        public static void DrawEnemies(List<ImageBrush> enemyList, DrawingContext drawingContext, GameLogic vm)
+        public static void DrawEnemies(List<ImageBrush> enemyList, DrawingContext drawingContext, GameLogic vm) // kirajzolja az ellenségeket
         {
             foreach (Enemy enemy in vm.EnemyList)
             {
-                if (enemy.Type == EnemyType.Easy)
+                if (enemy.EnemyType == EnemyType.Easy)
                 {
                     drawingContext.DrawRectangle(enemyList[0], null, new Rect(enemy.EnemyPoint.X, enemy.EnemyPoint.Y, enemy.Shape.Width, enemy.Shape.Height));
                 }
 
-                if (enemy.Type == EnemyType.Medium)
+                if (enemy.EnemyType == EnemyType.Medium)
                 {
                     drawingContext.DrawRectangle(enemyList[1], null, new Rect(enemy.EnemyPoint.X, enemy.EnemyPoint.Y, enemy.Shape.Width, enemy.Shape.Height));
                 }
 
-                if (enemy.Type == EnemyType.Hard)
+                if (enemy.EnemyType == EnemyType.Hard)
                 {
                     drawingContext.DrawRectangle(enemyList[2], null, new Rect(enemy.EnemyPoint.X, enemy.EnemyPoint.Y, enemy.Shape.Width, enemy.Shape.Height));
                 }
             }
         }
 
-        public static void DrawPlayerScore(DrawingContext drawingContext, GameLogic vm)
+        public static void DrawPlayerScore(DrawingContext drawingContext, GameLogic vm) // rajzolja a játékos pontjait
         {
             drawingContext.DrawText(
                     new FormattedText(
@@ -83,7 +83,7 @@
                     Brushes.White), new Point(10, 10));
         }
 
-        public static void DrawEnemyLifeScore(DrawingContext drawingContext, GameLogic vm)
+        public static void DrawEnemyLifeScore(DrawingContext drawingContext, GameLogic vm) // rajzolja az ellenség pontját
         {
             foreach (Enemy enemy in vm.EnemyList)
             {
@@ -98,9 +98,9 @@
             }
         }
 
-        public static void DrawLeaderBoard(DrawingContext drawingContext, GameLogic vm)
+        public static void DrawLeaderBoard(DrawingContext drawingContext, GameLogic vm) // ez rajzolja meg a ranglista menüponton belüli adatokat
         {
-            for (int i = 0; i <vm.PlayerScores.Count;i++)
+            for (int i = 0; i < vm.PlayerScores.Count; i++)
             {
                 string text = vm.PlayerScores[i].Name + "\t" + vm.PlayerScores[i].Score;
                 drawingContext.DrawText(
@@ -114,7 +114,7 @@
             }
         }
 
-        public static void DrawControlMenu(DrawingContext drawingContext)
+        public static void DrawControlMenu(DrawingContext drawingContext) // ez rajzolja meg a control menüponton belüli dolgokat
         {
             string text = "A játékban az ezeréves solymot tudod irányítani.\n-Mozgáshoz használd a jobbra-balra nyilat\n-Lövés - Space billentyű.\n-Két fegyver közötti váltáshoz - Jobb vagy Bal Shift.";
             drawingContext.DrawText(
@@ -127,7 +127,7 @@
                     Brushes.White), new Point(10, 10));
         }
 
-        public static void DrawGameOver(DrawingContext drawingContext, GameLogic vm)
+        public static void DrawGameOver(DrawingContext drawingContext, GameLogic vm) // kirajzolja hogy gameover ha meghaltunk
         {
             string text = "Game Over";
             drawingContext.DrawText(
@@ -140,7 +140,7 @@
                     Brushes.Red), new Point(130, vm.Size.Height / 2));
         }
 
-        public static void DrawPlayerLifeScore(DrawingContext drawingContext, GameLogic vm)
+        public static void DrawPlayerLifeScore(DrawingContext drawingContext, GameLogic vm) // kirajzolja a játékos pontjait amit gyűjtött
         {
             drawingContext.DrawText(
                     new FormattedText(

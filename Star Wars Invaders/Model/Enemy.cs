@@ -14,27 +14,26 @@
 
     public class Enemy
     {
-        private Rect shape;
-        private List<Bullet> bullets;
-        private Point enemyPoint;
-        private Random random = new Random();
-        private EnemyType type;
-        private int lifeScore;
-        private bool directionRight;
-        private bool directionLeft;
-        public int param;
+        private Rect shape; // Ellenseg formát reprezentál
+        private List<Bullet> bullets; // Ellenség lövedékei
+        private Point enemyPoint; // ellenség kezdőpont
+        private Random random = new Random(); // Segítő random szám
+        private EnemyType enemytype; // Ellenség típust reprezentál
+        private int lifeScore; // életpontot mutat
+        private bool directionRight; // Jobbra tart-e? segéd bool
+        private bool directionLeft; // balra tart-e? Segéd bool
 
-        public Enemy(double x, double y, EnemyType type)
+        public Enemy(double x, double y, EnemyType type) // Ellenség konstruktor
         {
             this.enemyPoint = new Point(x, y);
             this.bullets = new List<Bullet>();
-            this.type = type;
-            if (this.type == EnemyType.Easy)
+            this.enemytype = type;
+            if (this.enemytype == EnemyType.Easy)
             {
                 this.shape = new Rect(x, y, 60, 90);
                 this.lifeScore = 2;
             }
-            else if (this.type == EnemyType.Medium)
+            else if (this.enemytype == EnemyType.Medium)
             {
                 this.shape = new Rect(x, y, 30, 75);
                 this.lifeScore = 5;
@@ -44,11 +43,9 @@
                 this.shape = new Rect(x, y, 70, 105);
                 this.lifeScore = 10;
             }
-
-            this.param = 20;
         }
 
-        public List<Bullet> Bullets
+        public List<Bullet> Bullets // Ellenség lövedékeinek az írható olvasható tulajdonsága
         {
             get
             {
@@ -61,7 +58,7 @@
             }
         }
 
-        public Point EnemyPoint
+        public Point EnemyPoint // Kezdőpont tulajdonsága
         {
             get
             {
@@ -74,7 +71,7 @@
             }
         }
 
-        public Rect Shape
+        public Rect Shape // rect olvasható írhatü tulajdonság
         {
             get
             {
@@ -87,15 +84,15 @@
             }
         }
 
-        public EnemyType Type
+        public EnemyType EnemyType // ellenség típus tulajdonság írható és olvasható
         {
             get
             {
-                return this.type;
+                return this.enemytype;
             }
         }
 
-        public int LifeScore
+        public int LifeScore // életpont tulajdonság
         {
             get
             {
@@ -108,12 +105,12 @@
             }
         }
 
-        public void Move()
+        public void Move() // ellenséget mozgatja
         {
-            if (this.type == EnemyType.Easy)
+            if (this.enemytype == EnemyType.Easy)
             {
-                this.enemyPoint.Y += 60;
-                this.shape.Y += 60;
+                this.enemyPoint.Y += 20;
+                this.shape.Y += 20;
             }
             else
             {
@@ -138,8 +135,8 @@
                     }
                     else
                     {
-                        this.enemyPoint.X += this.param;
-                        this.shape.X += this.param;
+                        this.enemyPoint.X += 15;
+                        this.shape.X += 15;
                     }
                 }
                 else
@@ -151,17 +148,17 @@
                     }
                     else
                     {
-                        this.enemyPoint.X -= this.param;
-                        this.shape.X -= this.param;
+                        this.enemyPoint.X -= 15;
+                        this.shape.X -= 15;
                     }
                 }
             }
         }
 
-        public void Shoot()
+        public void Shoot() // Ellenség lövése
         {
             int damageLevel = 1;
-            if (this.type != EnemyType.Easy)
+            if (this.enemytype != EnemyType.Easy)
             {
                 this.bullets.Add(new Bullet(new Point(this.enemyPoint.X + (this.shape.Width / 2), this.enemyPoint.Y + this.shape.Height), BulletType.Imperial, damageLevel));
             }

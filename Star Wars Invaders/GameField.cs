@@ -10,15 +10,16 @@ namespace Star_Wars_Invaders
     using System.Windows.Media;
     using System.Windows.Media.Imaging;
 
-    public class GameField : FrameworkElement
+    public class GameField : FrameworkElement // Kirajzoló osztály
     {
-        // there will be brushes
-        private ImageBrush playerBrush;
-        private ImageBrush backgroundBrush;
-        private List<ImageBrush> enemies;
-        private GameLogic vm;
+        private ImageBrush playerBrush; // player képét reprezentálja
+        private ImageBrush backgroundBrush; // hátteret reprezentálja
+        private ImageBrush yodaBrush; // egyik felvehető elemet reprenzáltja
+        private List<ImageBrush> enemies; // Az ellenségek képét tárolja
+        private ImageBrush heartBrush; // Életnövelő képet reprezentál
+        private GameLogic vm; // Egy Játéklogikát reprentál
 
-        public void Init(GameLogic vm)
+        public void Init(GameLogic vm) // Beállítja a GameLogicot és a játéksorán felhasznál képeket
         {
             this.vm = vm;
             this.playerBrush = new ImageBrush(new BitmapImage(new Uri("Pics\\Player.png", UriKind.Relative)));
@@ -27,9 +28,11 @@ namespace Star_Wars_Invaders
             this.enemies.Add(new ImageBrush(new BitmapImage(new Uri("Pics\\boss1.png", UriKind.Relative))));
             this.enemies.Add(new ImageBrush(new BitmapImage(new Uri("Pics\\boss2.png", UriKind.Relative))));
             this.enemies.Add(new ImageBrush(new BitmapImage(new Uri("Pics\\boss3.png", UriKind.Relative))));
+            this.yodaBrush = new ImageBrush(new BitmapImage(new Uri("Pics\\yoda.png", UriKind.Relative)));
+            this.heartBrush = new ImageBrush(new BitmapImage(new Uri("Pics\\heart.png", UriKind.Relative)));
         }
 
-        protected override void OnRender(DrawingContext drawingContext)
+        protected override void OnRender(DrawingContext drawingContext) // kirajzoló függvény
         {
             if (this.vm != null)
             {
@@ -63,6 +66,18 @@ namespace Star_Wars_Invaders
                         DrawingContextHelp.DrawEnemyLifeScore(drawingContext, this.vm);
                         DrawingContextHelp.DrawPlayerScore(drawingContext, this.vm);
                         DrawingContextHelp.DrawPlayerLifeScore(drawingContext, this.vm);
+                    foreach (PickableElement pick in this.vm.PickableElementCollection)
+                    {
+                        if (pick.PickType == PickableElementType.Immortal)
+                        {
+                            drawingContext.DrawRectangle(this.yodaBrush, null, new Rect(pick.Location.X, pick.Location.Y, pick.Shape.Width, pick.Shape.Height));
+                        }
+                        else
+                        {
+                            drawingContext.DrawRectangle(this.heartBrush, null, new Rect(pick.Location.X, pick.Location.Y, pick.Shape.Width, pick.Shape.Height));
+                        }
+                    }
+
                     foreach (Enemy enemy in this.vm.EnemyList)
                     {
                         foreach (Bullet bullet in enemy.Bullets)

@@ -9,15 +9,15 @@
 
     public class Menu
     {
-        private List<string> menuElements;
-        private bool isMenuInactive;
-        private int choosenMenuElement;
-        private bool exit;
-        private bool leaderBoardActive;
-        private bool controlMenuElementActive;
-        private bool gameActive;
+        private List<string> menuElements; // stringeből álló menürendszer
+        private bool isMenuInactive; // menü aktiív-e
+        private int choosenMenuElement; // kiválasztott menüpont
+        private bool exit; // Kilépést detektál
+        private bool leaderBoardActive; // Nyitható-e a ranglista ablak
+        private bool controlMenuElementActive; // Ha ez be van kapcsolva akkor kirajzolja az onrender a irányítás menüpontot
+        private bool gameActive; // ha a játék még nem lett elindítva akkor ez false
 
-        public Menu()
+        public Menu() // beállító konstruktor
         {
             this.menuElements = new List<string>();
             this.menuElements.Add("Indítás");
@@ -27,7 +27,7 @@
             this.ChoosenMenuElement = 0;
         }
 
-        public List<string> MenuElements
+        public List<string> MenuElements // tulajdonsága a menüelemeknek
         {
             get
             {
@@ -40,7 +40,7 @@
             }
         }
 
-        public bool IsMenuInactive
+        public bool IsMenuInactive // menüaktivitás bool
         {
             get
             {
@@ -53,7 +53,7 @@
             }
         }
 
-        public int ChoosenMenuElement
+        public int ChoosenMenuElement // kiválasztott menüpont bool
         {
             get
             {
@@ -66,7 +66,7 @@
             }
         }
 
-        public bool Exit
+        public bool Exit // kilépést detektáló bool
         {
             get
             {
@@ -79,7 +79,7 @@
             }
         }
 
-        public bool LeaderBoardActive
+        public bool LeaderBoardActive // nyitható-e a ranglista bool
         {
             get
             {
@@ -92,7 +92,7 @@
             }
         }
 
-        public bool ControlMenuElementActive
+        public bool ControlMenuElementActive // irányító menü rajzolható-e bool
         {
             get
             {
@@ -105,7 +105,7 @@
             }
         }
 
-        public bool GameActive
+        public bool GameActive // játék aktivitását reprezentáló bool
         {
             get
             {
@@ -118,7 +118,7 @@
             }
         }
 
-        public void MenuDown()
+        public void MenuDown() // menüben lefelé léptetés
         {
             if (this.choosenMenuElement + 1 < this.menuElements.Count)
             {
@@ -126,7 +126,7 @@
             }
         }
 
-        public void MenuUp()
+        public void MenuUp() // menüben felfelé léptetés
         {
             if (this.choosenMenuElement - 1 > -1)
             {
@@ -134,7 +134,7 @@
             }
         }
 
-        public void ChooseMenuElement()
+        public void ChooseMenuElement() // menüléptetés kezelése
         {
             switch (this.choosenMenuElement)
             {

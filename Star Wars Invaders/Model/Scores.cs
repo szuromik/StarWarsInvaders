@@ -8,16 +8,16 @@
 
     public class Scores
     {
-        private string name;
-        private int score;
+        private string name; // rekorder neve
+        private int score; // rekorder pontja
 
-        public Scores(string name, int score)
+        public Scores(string name, int score) // beállító konstruktor
         {
             this.name = name;
             this.score = score;
         }
 
-        public string Name
+        public string Name // tulajdonság a névnek
         {
             get
             {
@@ -30,7 +30,7 @@
             }
         }
 
-        public int Score
+        public int Score // tulajdonság a pontnak
         {
             get
             {
