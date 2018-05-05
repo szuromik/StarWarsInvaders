@@ -7,17 +7,17 @@
     using System.Threading.Tasks;
     using static System.Net.Mime.MediaTypeNames;
 
-    public class Menu
+    public class Menu /// egy menüt reprezentáló publikus láthatóságú osztály
     {
-        private List<string> menuElements; // stringeből álló menürendszer
-        private bool isMenuInactive; // menü aktiív-e
-        private int choosenMenuElement; // kiválasztott menüpont
-        private bool exit; // Kilépést detektál
-        private bool leaderBoardActive; // Nyitható-e a ranglista ablak
-        private bool controlMenuElementActive; // Ha ez be van kapcsolva akkor kirajzolja az onrender a irányítás menüpontot
-        private bool gameActive; // ha a játék még nem lett elindítva akkor ez false
+        private List<string> menuElements; /// stringeből álló menürendszer
+        private bool isMenuInactive; /// menü aktiív-e
+        private int choosenMenuElement; /// kiválasztott menüpont
+        private bool exit; /// Kilépést detektál
+        private bool leaderBoardActive; /// Nyitható-e a ranglista ablak
+        private bool controlMenuElementActive; /// Ha ez be van kapcsolva akkor kirajzolja az onrender a irányítás menüpontot
+        private bool gameActive; /// ha a játék még nem lett elindítva akkor ez false
 
-        public Menu() // beállító konstruktor
+        public Menu() /// beállító konstruktor
         {
             this.menuElements = new List<string>();
             this.menuElements.Add("Indítás");
@@ -27,7 +27,7 @@
             this.ChoosenMenuElement = 0;
         }
 
-        public List<string> MenuElements // tulajdonsága a menüelemeknek
+        public List<string> MenuElements /// tulajdonsága a menüelemeknek
         {
             get
             {
@@ -40,7 +40,7 @@
             }
         }
 
-        public bool IsMenuInactive // menüaktivitás bool
+        public bool IsMenuInactive /// menüaktivitás bool
         {
             get
             {
@@ -53,7 +53,7 @@
             }
         }
 
-        public int ChoosenMenuElement // kiválasztott menüpont bool
+        public int ChoosenMenuElement /// kiválasztott menüpont bool
         {
             get
             {
@@ -66,7 +66,7 @@
             }
         }
 
-        public bool Exit // kilépést detektáló bool
+        public bool Exit /// kilépést detektáló bool
         {
             get
             {
@@ -79,7 +79,7 @@
             }
         }
 
-        public bool LeaderBoardActive // nyitható-e a ranglista bool
+        public bool LeaderBoardActive /// nyitható-e a ranglista bool
         {
             get
             {
@@ -92,7 +92,7 @@
             }
         }
 
-        public bool ControlMenuElementActive // irányító menü rajzolható-e bool
+        public bool ControlMenuElementActive /// irányító menü rajzolható-e bool
         {
             get
             {
@@ -105,7 +105,7 @@
             }
         }
 
-        public bool GameActive // játék aktivitását reprezentáló bool
+        public bool GameActive /// játék aktivitását reprezentáló bool
         {
             get
             {
@@ -118,7 +118,7 @@
             }
         }
 
-        public void MenuDown() // menüben lefelé léptetés
+        public void MenuDown() /// menüben lefelé léptetés
         {
             if (this.choosenMenuElement + 1 < this.menuElements.Count)
             {
@@ -126,7 +126,7 @@
             }
         }
 
-        public void MenuUp() // menüben felfelé léptetés
+        public void MenuUp() /// menüben felfelé léptetés
         {
             if (this.choosenMenuElement - 1 > -1)
             {
@@ -134,7 +134,7 @@
             }
         }
 
-        public void ChooseMenuElement() // menüléptetés kezelése
+        public void ChooseMenuElement() /// menüléptetés kezelése
         {
             switch (this.choosenMenuElement)
             {

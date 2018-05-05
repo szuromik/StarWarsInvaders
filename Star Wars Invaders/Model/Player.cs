@@ -3,17 +3,17 @@
     using System.Collections.Generic;
     using System.Windows;
 
-    public class Player
+    public class Player /// egy játékost reprezentáló osztály
     {
-        private List<Bullet> bullets; // játékos lövedékei
-        private Point playerPoint; // játékos kezdőpontja
+        private List<Bullet> bullets; /// játékos lövedékei
+        private Point playerPoint; /// játékos kezdőpontja
         private BulletType actualType; // lövedék típusa
-        private Rect shape; // Játékost reprezentáló alakzat
-        private int score; // pontszámot reprenztál
-        private int lifeScore; // életpontot reprezentál
-        private bool immortal; // felvehető elemnél fontos ezzel állítjuk be hogy hallhatatlan
+        private Rect shape; /// Játékost reprezentáló alakzat
+        private int score; /// pontszámot reprenztál
+        private int lifeScore; /// életpontot reprezentál
+        private bool immortal; /// felvehető elemnél fontos ezzel állítjuk be hogy hallhatatlan
 
-        public Player(double x, double y) // konstruktor a játékosnak
+        public Player(double x, double y) /// konstruktor a játékosnak
         {
             this.playerPoint = new Point(x, y);
             this.Bullets = new List<Bullet>();
@@ -23,7 +23,7 @@
             this.lifeScore = 10;
         }
 
-        public Point PlayerPoint // Tulajdonság a játékos kezdőpontjára
+        public Point PlayerPoint /// Tulajdonság a játékos kezdőpontjára
         {
             get
             {
@@ -36,7 +36,7 @@
             }
         }
 
-        public List<Bullet> Bullets // Játékos lövedékei tulajdonság
+        public List<Bullet> Bullets /// Játékos lövedékei tulajdonság
         {
             get
             {
@@ -49,7 +49,7 @@
             }
         }
 
-        public BulletType ActualType // Golyótípus tulajdonsága
+        public BulletType ActualType /// Golyótípus tulajdonsága
         {
             get
             {
@@ -62,7 +62,7 @@
             }
         }
 
-        public int Score // pontszám tulajdonsága
+        public int Score /// pontszám tulajdonsága
         {
             get
             {
@@ -75,7 +75,7 @@
             }
         }
 
-        public int LifeScore // életpont tulajdonsága
+        public int LifeScore /// életpont tulajdonsága
         {
             get
             {
@@ -88,7 +88,7 @@
             }
         }
 
-        public Rect Shape // játékos alakzatot reprenzentál
+        public Rect Shape /// játékos alakzatot reprenzentál
         {
             get
             {
@@ -101,7 +101,7 @@
             }
         }
 
-        public bool Immortal // hallhatatlanság tulajdonsága
+        public bool Immortal /// hallhatatlanság tulajdonsága
         {
             get
             {
@@ -114,19 +114,19 @@
             }
         }
 
-        public void Move(int value) // játékost mozgatása
+        public void Move(int value) /// játékost mozgatása
         {
             this.playerPoint.X += value;
             this.shape.X += value;
         }
 
-        public void Shoot() // játékos lőv
+        public void Shoot() /// játékos lőv
         {
             int damageLevel = 1;
             this.bullets.Add(new Bullet(new Point(this.PlayerPoint.X + 30, this.PlayerPoint.Y), this.actualType, damageLevel));
         }
 
-        public void ChangeWeapon() // fegyvertcserél
+        public void ChangeWeapon() /// fegyvertcserél
          {
              if (this.actualType == BulletType.Laser)
             {
@@ -138,7 +138,7 @@
             }
         }
 
-        public void Damage(int value) // sérül a játékost
+        public void Damage(int value) /// sérül a játékost
         {
             if (!this.Immortal)
             {

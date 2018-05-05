@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['createdelegate',['CreateDelegate',['../class_xaml_generated_namespace_1_1_generated_internal_type_helper.html#a8ec4c37e82d9f4e867e9655f4eac3a78',1,'XamlGeneratedNamespace.GeneratedInternalTypeHelper.CreateDelegate(System.Type delegateType, object target, string handler)'],['../class_xaml_generated_namespace_1_1_generated_internal_type_helper.html#a8ec4c37e82d9f4e867e9655f4eac3a78',1,'XamlGeneratedNamespace.GeneratedInternalTypeHelper.CreateDelegate(System.Type delegateType, object target, string handler)']]],
-  ['createinstance',['CreateInstance',['../class_xaml_generated_namespace_1_1_generated_internal_type_helper.html#aefb7a98fceb9c287cef4756942f441d1',1,'XamlGeneratedNamespace.GeneratedInternalTypeHelper.CreateInstance(System.Type type, System.Globalization.CultureInfo culture)'],['../class_xaml_generated_namespace_1_1_generated_internal_type_helper.html#aefb7a98fceb9c287cef4756942f441d1',1,'XamlGeneratedNamespace.GeneratedInternalTypeHelper.CreateInstance(System.Type type, System.Globalization.CultureInfo culture)']]]
+  ['billentyunyomas',['Billentyunyomas',['../class_star___wars___invaders_1_1_game_logic.html#aeef32bd88b5fcb1fa1f1337cef36d58e',1,'Star_Wars_Invaders::GameLogic']]],
+  ['bullet',['Bullet',['../class_star___wars___invaders_1_1_bullet.html#a95c81bf97bf1a42ff0054c97501c6e9b',1,'Star_Wars_Invaders::Bullet']]]
 ];

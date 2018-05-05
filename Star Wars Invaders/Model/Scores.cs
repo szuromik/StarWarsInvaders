@@ -6,18 +6,18 @@
     using System.Text;
     using System.Threading.Tasks;
 
-    public class Scores
+    public class Scores /// Pontot reprezentáló publikus láthatóságú osztály
     {
-        private string name; // rekorder neve
-        private int score; // rekorder pontja
+        private string name; /// rekorder neve
+        private int score; /// rekorder pontja
 
-        public Scores(string name, int score) // beállító konstruktor
+        public Scores(string name, int score) /// beállító konstruktor
         {
             this.name = name;
             this.score = score;
         }
 
-        public string Name // tulajdonság a névnek
+        public string Name /// tulajdonság a névnek
         {
             get
             {
@@ -30,7 +30,7 @@
             }
         }
 
-        public int Score // tulajdonság a pontnak
+        public int Score /// tulajdonság a pontnak
         {
             get
             {

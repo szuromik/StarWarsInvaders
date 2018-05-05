@@ -1,5 +1,8 @@
 var searchData=
 [
-  ['leadboard',['LeadBoard',['../class_star___wars___invaders_1_1_lead_board.html',1,'Star_Wars_Invaders']]],
-  ['leaderboardwindow',['LeaderBoardWindow',['../class_star___wars___invaders_1_1_leader_board_window.html',1,'Star_Wars_Invaders']]]
+  ['immortal',['Immortal',['../class_star___wars___invaders_1_1_player.html#a6ced34109c622bc1fc5f6d34145bc703',1,'Star_Wars_Invaders::Player']]],
+  ['init',['Init',['../class_star___wars___invaders_1_1_game_field.html#a8626c64cb35778f48bc0d005f5de6af4',1,'Star_Wars_Invaders::GameField']]],
+  ['initializecomponent',['InitializeComponent',['../class_star___wars___invaders_1_1_app.html#a317367e37fd627e7c233ff9ff5771302',1,'Star_Wars_Invaders.App.InitializeComponent()'],['../class_star___wars___invaders_1_1_app.html#a317367e37fd627e7c233ff9ff5771302',1,'Star_Wars_Invaders.App.InitializeComponent()'],['../class_star___wars___invaders_1_1_lead_board.html#a571cff8ff68324965e2eb4f2c52ea9f2',1,'Star_Wars_Invaders.LeadBoard.InitializeComponent()'],['../class_star___wars___invaders_1_1_leader_board_window.html#a588098a1d5197bed2b6913d0a3ad21bd',1,'Star_Wars_Invaders.LeaderBoardWindow.InitializeComponent()'],['../class_star___wars___invaders_1_1_leader_board_window.html#a588098a1d5197bed2b6913d0a3ad21bd',1,'Star_Wars_Invaders.LeaderBoardWindow.InitializeComponent()'],['../class_star___wars___invaders_1_1_main_window.html#a52325539486d8865984ec639af186d61',1,'Star_Wars_Invaders.MainWindow.InitializeComponent()'],['../class_star___wars___invaders_1_1_main_window.html#a52325539486d8865984ec639af186d61',1,'Star_Wars_Invaders.MainWindow.InitializeComponent()']]],
+  ['ismenuinactive',['IsMenuInactive',['../class_star___wars___invaders_1_1_menu.html#a5f2136b6dd95852ece2aa3be6468235b',1,'Star_Wars_Invaders::Menu']]],
+  ['isplayerimmortal',['IsPlayerImmortal',['../class_star___wars___invaders_1_1_game_logic.html#a8dd7a09847b61edded7c41fcf7aba6cf',1,'Star_Wars_Invaders::GameLogic']]]
 ];

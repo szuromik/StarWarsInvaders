@@ -8,9 +8,9 @@
     using System.Windows;
     using System.Windows.Media;
 
-    public static class DrawingContextHelp // Segédosztály hogy az GameField Onrender oszályába átlátható legyen a kód
+    public static class DrawingContextHelp /// Segédosztály hogy az GameField Onrender oszályába átlátható legyen a kód
     {
-        public static void DrawMenu(DrawingContext drawingContext, GameLogic vm) // kirajzolja a menüt
+        public static void DrawMenu(DrawingContext drawingContext, GameLogic vm) /// kirajzolja a menüt
         {
             for (int i = 0; i < vm.MainMenu.MenuElements.Count; i++)
             {
@@ -35,7 +35,7 @@
             }
         }
 
-        public static void DrawPlayerBullets(DrawingContext drawingContext, GameLogic vm) // kirajzolja a játékos lövedékeit
+        public static void DrawPlayerBullets(DrawingContext drawingContext, GameLogic vm) /// kirajzolja a játékos lövedékeit
         {
             foreach (Bullet item in vm.Player.Bullets)
             {
@@ -50,7 +50,7 @@
             }
         }
 
-        public static void DrawEnemies(List<ImageBrush> enemyList, DrawingContext drawingContext, GameLogic vm) // kirajzolja az ellenségeket
+        public static void DrawEnemies(List<ImageBrush> enemyList, DrawingContext drawingContext, GameLogic vm) /// kirajzolja az ellenségeket
         {
             foreach (Enemy enemy in vm.EnemyList)
             {
@@ -71,7 +71,7 @@
             }
         }
 
-        public static void DrawPlayerScore(DrawingContext drawingContext, GameLogic vm) // rajzolja a játékos pontjait
+        public static void DrawPlayerScore(DrawingContext drawingContext, GameLogic vm) /// rajzolja a játékos pontjait
         {
             drawingContext.DrawText(
                     new FormattedText(
@@ -83,7 +83,7 @@
                     Brushes.White), new Point(10, 10));
         }
 
-        public static void DrawEnemyLifeScore(DrawingContext drawingContext, GameLogic vm) // rajzolja az ellenség pontját
+        public static void DrawEnemyLifeScore(DrawingContext drawingContext, GameLogic vm) /// rajzolja az ellenség pontját
         {
             foreach (Enemy enemy in vm.EnemyList)
             {
@@ -98,7 +98,7 @@
             }
         }
 
-        public static void DrawLeaderBoard(DrawingContext drawingContext, GameLogic vm) // ez rajzolja meg a ranglista menüponton belüli adatokat
+        public static void DrawLeaderBoard(DrawingContext drawingContext, GameLogic vm) /// ez rajzolja meg a ranglista menüponton belüli adatokat
         {
             for (int i = 0; i < vm.PlayerScores.Count; i++)
             {
@@ -114,7 +114,7 @@
             }
         }
 
-        public static void DrawControlMenu(DrawingContext drawingContext) // ez rajzolja meg a control menüponton belüli dolgokat
+        public static void DrawControlMenu(DrawingContext drawingContext) /// ez rajzolja meg a control menüponton belüli dolgokat
         {
             string text = "A játékban az ezeréves solymot tudod irányítani.\n-Mozgáshoz használd a jobbra-balra nyilat\n-Lövés - Space billentyű.\n-Két fegyver közötti váltáshoz - Jobb vagy Bal Shift.";
             drawingContext.DrawText(
@@ -127,7 +127,7 @@
                     Brushes.White), new Point(10, 10));
         }
 
-        public static void DrawGameOver(DrawingContext drawingContext, GameLogic vm) // kirajzolja hogy gameover ha meghaltunk
+        public static void DrawGameOver(DrawingContext drawingContext, GameLogic vm) /// kirajzolja hogy gameover ha meghaltunk
         {
             string text = "Game Over";
             drawingContext.DrawText(
@@ -140,7 +140,7 @@
                     Brushes.Red), new Point(130, vm.Size.Height / 2));
         }
 
-        public static void DrawPlayerLifeScore(DrawingContext drawingContext, GameLogic vm) // kirajzolja a játékos pontjait amit gyűjtött
+        public static void DrawPlayerLifeScore(DrawingContext drawingContext, GameLogic vm) /// kirajzolja a játékos pontjait amit gyűjtött
         {
             drawingContext.DrawText(
                     new FormattedText(

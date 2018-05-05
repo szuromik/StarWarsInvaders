@@ -11,20 +11,20 @@ namespace Star_Wars_Invaders
     using System.Threading.Tasks;
     using System.Windows;
 
-    public enum BulletType // lőszertípus
+    public enum BulletType /// lőszertípus
     {
         Simple, Laser, Imperial, ImperialLaser
     }
 
-    public class Bullet
+    public class Bullet /// egy lőszert reprezentáló publikus láthatóságú osztály
     {
-        private Point location; // lőszer helyzete
-        private Rect shape; // lőszer alakzata
-        private BulletType bulletType; // lőszer típusa
-        private int damageLevel; // lőszer sérőlés okozása
-        private int bulletVelocity; // lőszer gyorsaság
+        private Point location; /// lőszer helyzete
+        private Rect shape; /// lőszer alakzata
+        private BulletType bulletType; /// lőszer típusa
+        private int damageLevel; /// lőszer sérőlés okozása
+        private int bulletVelocity; /// lőszer gyorsaság
 
-        public Bullet(Point location, BulletType bulletType, int damageLevel) // konstruktor egy lövedéknek
+        public Bullet(Point location, BulletType bulletType, int damageLevel) /// konstruktor egy lövedéknek
         {
             this.Location = location;
             this.Shape = new Rect(location.X, location.Y, 10, 10);
@@ -33,7 +33,7 @@ namespace Star_Wars_Invaders
             this.InitalizeBulletVelocity();
         }
 
-        public Point Location // tulajdonsága a helyzetnek
+        public Point Location /// tulajdonsága a helyzetnek
         {
             get
             {
@@ -46,7 +46,7 @@ namespace Star_Wars_Invaders
             }
         }
 
-        public Rect Shape // tulajdonság az alakzatnak
+        public Rect Shape /// tulajdonság az alakzatnak
         {
             get
             {
@@ -59,7 +59,7 @@ namespace Star_Wars_Invaders
             }
         }
 
-        public BulletType BulletType // tulajdonság a lőszer típusának
+        public BulletType BulletType /// tulajdonság a lőszer típusának
         {
             get
             {
@@ -72,7 +72,7 @@ namespace Star_Wars_Invaders
             }
         }
 
-        public int DamageLevel // tulajdonsága a lőszer sebzésének
+        public int DamageLevel /// tulajdonsága a lőszer sebzésének
         {
             get
             {
@@ -85,19 +85,19 @@ namespace Star_Wars_Invaders
             }
         }
 
-        public void MovePlayerBullets() // Mozgató függvény a játékosnál
+        public void MovePlayerBullets() /// Mozgató függvény a játékosnál
         {
             this.location.Y -= 10 * this.bulletVelocity;
             this.shape.Y -= 10 * this.bulletVelocity;
         }
 
-        public void MoveEnemyBullets() // mozgató függvény az ellenfélnél
+        public void MoveEnemyBullets() /// mozgató függvény az ellenfélnél
         {
             this.location.Y += 10;
             this.shape.Y += 10;
         }
 
-        private void InitalizeBulletVelocity() // lőszergyorsaságot állít be 
+        private void InitalizeBulletVelocity() /// lőszergyorsaságot állít be
         {
             if (this.bulletType == BulletType.Simple || this.bulletType == BulletType.Imperial)
             {

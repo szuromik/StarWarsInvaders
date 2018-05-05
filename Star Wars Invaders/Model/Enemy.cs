@@ -7,23 +7,23 @@
     using System.Threading.Tasks;
     using System.Windows;
 
-    public enum EnemyType
+    public enum EnemyType /// ellenség típust reprezentál
     {
         Easy, Medium, Hard
     }
 
-    public class Enemy
+    public class Enemy /// Ellenség osztály. publikus láthatóságú
     {
-        private Rect shape; // Ellenseg formát reprezentál
-        private List<Bullet> bullets; // Ellenség lövedékei
-        private Point enemyPoint; // ellenség kezdőpont
-        private Random random = new Random(); // Segítő random szám
-        private EnemyType enemytype; // Ellenség típust reprezentál
-        private int lifeScore; // életpontot mutat
-        private bool directionRight; // Jobbra tart-e? segéd bool
-        private bool directionLeft; // balra tart-e? Segéd bool
+        private Rect shape; /// Ellenseg formát reprezentál
+        private List<Bullet> bullets; /// Ellenség lövedékei
+        private Point enemyPoint; /// ellenség kezdőpont
+        private Random random = new Random(); /// Segítő random szám
+        private EnemyType enemytype; /// Ellenség típust reprezentál
+        private int lifeScore; /// életpontot mutat
+        private bool directionRight; /// Jobbra tart-e? segéd bool
+        private bool directionLeft; /// balra tart-e? Segéd bool
 
-        public Enemy(double x, double y, EnemyType type) // Ellenség konstruktor
+        public Enemy(double x, double y, EnemyType type) /// Ellenség konstruktor
         {
             this.enemyPoint = new Point(x, y);
             this.bullets = new List<Bullet>();
@@ -45,7 +45,7 @@
             }
         }
 
-        public List<Bullet> Bullets // Ellenség lövedékeinek az írható olvasható tulajdonsága
+        public List<Bullet> Bullets /// Ellenség lövedékeinek az írható olvasható tulajdonsága
         {
             get
             {
@@ -58,7 +58,7 @@
             }
         }
 
-        public Point EnemyPoint // Kezdőpont tulajdonsága
+        public Point EnemyPoint /// Kezdőpont tulajdonsága
         {
             get
             {
@@ -71,7 +71,7 @@
             }
         }
 
-        public Rect Shape // rect olvasható írhatü tulajdonság
+        public Rect Shape /// rect olvasható írhatü tulajdonság
         {
             get
             {
@@ -84,7 +84,7 @@
             }
         }
 
-        public EnemyType EnemyType // ellenség típus tulajdonság írható és olvasható
+        public EnemyType EnemyType /// ellenség típus tulajdonság írható és olvasható
         {
             get
             {
@@ -92,7 +92,7 @@
             }
         }
 
-        public int LifeScore // életpont tulajdonság
+        public int LifeScore /// életpont tulajdonság
         {
             get
             {
@@ -105,7 +105,7 @@
             }
         }
 
-        public void Move() // ellenséget mozgatja
+        public void Move() /// ellenséget mozgatja
         {
             if (this.enemytype == EnemyType.Easy)
             {
@@ -155,7 +155,7 @@
             }
         }
 
-        public void Shoot() // Ellenség lövése
+        public void Shoot() /// Ellenség lövése
         {
             int damageLevel = 1;
             if (this.enemytype != EnemyType.Easy)

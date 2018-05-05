@@ -7,25 +7,25 @@
     using System.Threading.Tasks;
     using System.Windows;
 
-    public enum PickableElementType // felvehető elem enum
+    public enum PickableElementType /// felvehető elem enum
     {
         Life, Immortal
     }
 
-    public class PickableElement // Felvehető elemet reprezentáló osztály
+    public class PickableElement /// Felvehető elemet reprezentáló osztály
     {
         private Point location;
         private Rect shape;
         private PickableElementType pickType;
 
-        public PickableElement(double x, double y, PickableElementType pickType) // felvehető elem konstruktora
+        public PickableElement(double x, double y, PickableElementType pickType) /// felvehető elem konstruktora
         {
             this.location = new Point(x, y);
             this.shape = new Rect(x, y, 40, 40);
             this.pickType = pickType;
         }
 
-        public Point Location // reprezántlja a kezdő pont tulajdonságát
+        public Point Location /// reprezántlja a kezdő pont tulajdonságát
         {
             get
             {
@@ -38,7 +38,7 @@
             }
         }
 
-        public Rect Shape // reprezentálja a felvehető elem alakjának a tulajdonságát
+        public Rect Shape /// reprezentálja a felvehető elem alakjának a tulajdonságát
         {
             get
             {
@@ -51,7 +51,7 @@
             }
         }
 
-        public PickableElementType PickType // olvasható írható tulajdonság a felvehető elem típusához
+        public PickableElementType PickType /// olvasható írható tulajdonság a felvehető elem típusához
         {
             get
             {
@@ -64,7 +64,7 @@
             }
         }
 
-        public void Move() // Ez mozgatja a felvehető elemet
+        public void Move() /// Ez mozgatja a felvehető elemet
         {
             this.location.Y += 5;
             this.shape.Y += 5;

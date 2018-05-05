@@ -1,4 +1,6 @@
 var searchData=
 [
-  ['setpropertyvalue',['SetPropertyValue',['../class_xaml_generated_namespace_1_1_generated_internal_type_helper.html#ade0f04c0f7b18dd5b170e071d5534d38',1,'XamlGeneratedNamespace.GeneratedInternalTypeHelper.SetPropertyValue(System.Reflection.PropertyInfo propertyInfo, object target, object value, System.Globalization.CultureInfo culture)'],['../class_xaml_generated_namespace_1_1_generated_internal_type_helper.html#ade0f04c0f7b18dd5b170e071d5534d38',1,'XamlGeneratedNamespace.GeneratedInternalTypeHelper.SetPropertyValue(System.Reflection.PropertyInfo propertyInfo, object target, object value, System.Globalization.CultureInfo culture)']]]
+  ['gamelogic',['GameLogic',['../class_star___wars___invaders_1_1_game_logic.html#a5c085ef7839b265964363934fbdb6ea7',1,'Star_Wars_Invaders::GameLogic']]],
+  ['generateenemy',['GenerateEnemy',['../class_star___wars___invaders_1_1_game_logic.html#a5dd0fc73c9c6e6ad81b1e1c3dfb0f77f',1,'Star_Wars_Invaders::GameLogic']]],
+  ['getpropertyvalue',['GetPropertyValue',['../class_xaml_generated_namespace_1_1_generated_internal_type_helper.html#afdc9fe15b56607d02082908d934480c6',1,'XamlGeneratedNamespace::GeneratedInternalTypeHelper']]]
 ];

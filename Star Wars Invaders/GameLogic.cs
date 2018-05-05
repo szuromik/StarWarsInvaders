@@ -10,23 +10,23 @@
     using System.Windows;
     using System.Windows.Input;
 
-    public class GameLogic
+    public class GameLogic /// It jelenik meg a játék logikája
     {
-        private Player player;
-        private Size size;
-        private List<Bullet> bulletsToDelete;
-        private List<Enemy> enemyList;
-        private Random r = new Random();
-        private List<Enemy> enemyToDelete;
-        private Menu mainMenu;
-        private bool gameOver;
-        private List<Scores> playerScores;
-        private double makeItDifficult;
-        private bool leaderBoardOpen;
-        private List<PickableElement> pickableElementCollection;
-        private bool isPlayerImmortal;
+        private Player player; /// Egy játékos definálása a pályán
+        private Size size; /// A játéktér mérete
+        private List<Bullet> bulletsToDelete; /// Ha ütközik a lövedék valamivel vagy kimegy a pályáról ez egy segéd váltóz
+        private List<Enemy> enemyList; // Pályán elhelyezkedő ellenfelek
+        private Random r = new Random(); /// Véletlenszám generálás. A felvehető elemek és ellenségek generálásánál kap szerpet 
+        private List<Enemy> enemyToDelete; /// Segédváltozó ellenségek törlésére
+        private Menu mainMenu; /// létrehoz egy menüt
+        private bool gameOver; /// Ez alapján tudjuk hogy a játék véget ért-e már 
+        private List<Scores> playerScores; /// A játékosunk pontjai ami a ranglistán jelenik meg
+        private double makeItDifficult; /// Ez a szám nehezíti a dolgunkat, ez alapján lesz több ellenség
+        private bool leaderBoardOpen; /// Felugrott-e már a ranglista ablak
+        private List<PickableElement> pickableElementCollection; /// a felvehető elemek reprezentálja a pályán
+        private bool isPlayerImmortal; /// Visszaadja hogy a játékos épp isten üzemmódba van vagy nincs
 
-        public GameLogic(Size size) // GameLogic konstruktor. Elsődleges paraméter a size ez alapján fogja a játékost példányosítani
+        public GameLogic(Size size) /// GameLogic konstruktor. Elsődleges paraméter a size ez alapján fogja a játékost példányosítani
         {
             this.Size = size;
             this.playerScores = new List<Scores>();
@@ -34,7 +34,7 @@
             this.ReadScore();
         }
 
-        public Player Player // írható olvasható tulajdonság a játékoshoz
+        public Player Player /// írható olvasható tulajdonság a játékoshoz
         {
             get
             {
@@ -47,7 +47,7 @@
             }
         }
 
-        public List<Enemy> EnemyList // a pályán elhelyezkedő ellenségeket reprezentáló írható/olvasható tulajdonság
+        public List<Enemy> EnemyList /// a pályán elhelyezkedő ellenségeket reprezentáló írható/olvasható tulajdonság
         {
             get
             {
@@ -60,7 +60,7 @@
             }
         }
 
-        public Menu MainMenu // Egy menüt reprezentáló írható és olvasható tulajdonság
+        public Menu MainMenu /// Egy menüt reprezentáló írható és olvasható tulajdonság
         {
             get
             {
@@ -68,7 +68,7 @@
             }
         }
 
-        public bool GameOver // Bool változó ami akkor lesz true ha az ellenfél megvan a pályán(elfogy az összes életpontja)
+        public bool GameOver /// Bool változó ami akkor lesz true ha az ellenfél megvan a pályán(elfogy az összes életpontja)
         {
             get
             {
@@ -81,7 +81,7 @@
             }
         }
 
-        public Size Size // Ez reprezentálja a játéktérnek a méretét
+        public Size Size /// Ez reprezentálja a játéktérnek a méretét
         {
             get
             {
@@ -94,7 +94,7 @@
             }
         }
 
-        public bool LeaderBoardOpen // Ha meghalunk a pályán akkor ez a változó true lesz, a főablak code behind-ba a következő ticknél megnyílik egy új ablak ahol be lehet írni magunkat a ranglistára
+        public bool LeaderBoardOpen /// Ha meghalunk a pályán akkor ez a változó true lesz, a főablak code behind-ba a következő ticknél megnyílik egy új ablak ahol be lehet írni magunkat a ranglistára
         {
             get
             {
@@ -107,7 +107,7 @@
             }
         }
 
-        public List<Scores> PlayerScores
+        public List<Scores> PlayerScores /// játékos pontjait jelképező változónak a tulajdonsága
         {
             get
             {
@@ -120,7 +120,7 @@
             }
         }
 
-        public List<PickableElement> PickableElementCollection
+        public List<PickableElement> PickableElementCollection /// tulajdonság a felvehető elemeknek
         {
             get
             {
@@ -133,7 +133,7 @@
             }
         }
 
-        public bool IsPlayerImmortal
+        public bool IsPlayerImmortal /// játékos halhatatlanságát visszaadó tulajdonság
         {
             get
             {
@@ -146,7 +146,7 @@
             }
         }
 
-        public void EnemyShoot() // ellenség lövése
+        public void EnemyShoot() /// ellenség lövése
         {
             foreach (Enemy enemy in this.EnemyList)
             {
@@ -154,7 +154,7 @@
             }
         }
 
-        public void ToStartState() // Segédfüggvény. Nem átláthatatlan kódsor hanem egy különfüggvénybe ki van szervezve. Nagy szerepe van a ranglista utánni újbóli játéknál
+        public void ToStartState() /// Segédfüggvény. Nem átláthatatlan kódsor hanem egy különfüggvénybe ki van szervezve. Nagy szerepe van a ranglista utánni újbóli játéknál
         {
             this.player = new Player(this.size.Width / 2, this.size.Height - 100);
             this.enemyList = new List<Enemy>();
@@ -163,7 +163,7 @@
             this.pickableElementCollection = new List<PickableElement>();
         }
 
-        public void GenerateEnemy() // generálja az ellenfeleket
+        public void GenerateEnemy() /// generálja az ellenfeleket
         {
             EnemyType enemytypehelper = (EnemyType)this.r.Next(0, 3);
             if (this.enemyList.Count < 4 + (int)this.makeItDifficult)
@@ -178,7 +178,7 @@
             }
         }
 
-        public void SaveScores() // ez menti el a pontokat
+        public void SaveScores() /// ez menti el a pontokat
         {
             StreamWriter sw = new StreamWriter("Rekordok.txt");
             for (int i = 0; i < this.playerScores.Count; i++)
@@ -189,7 +189,7 @@
             sw.Close();
         }
 
-        public void DoTurn() // osszefoglaló függvény hogy egy periódus alatt milyen függvények hívódjanak
+        public void DoTurn() /// osszefoglaló függvény hogy egy periódus alatt milyen függvények hívódjanak
         {
             if (this.mainMenu.GameActive)
             {
@@ -225,12 +225,12 @@
             }
         }
 
-        public int ActualScore()
+        public int ActualScore()  /// Az adott játszma alatt elért pontot visszaadó függvény
         {
             return this.player.Score;
-        } // Az adott játszma alatt elért pontot visszaadó függvény
+        }
 
-        public void EnemyMove() // Ez mozgatja az ellensége
+        public void EnemyMove() /// Ez mozgatja az ellensége
         {
             foreach (Enemy enemy in this.enemyList)
             {
@@ -238,7 +238,7 @@
             }
         }
 
-        public void Billentyunyomas(Key e) // Ezt a függvényt hívja meg a fő code behind ez kezeli a különböző billentyűnyomásokat
+        public void Billentyunyomas(Key e) /// Ezt a függvényt hívja meg a fő code behind ez kezeli a különböző billentyűnyomásokat
         {
             if (e == Key.Left)
             {
@@ -305,7 +305,7 @@
             }
         }
 
-        private void GeneratePickableElement() // generál felvehető elemet
+        private void GeneratePickableElement() /// generál felvehető elemet
         {
             PickableElementType type = (PickableElementType)this.r.Next(0, 2);
             int seged = this.r.Next(0, 50);
@@ -315,7 +315,7 @@
             }
         }
 
-        private void MovePickableElement() // ez mozgatja a felvehető elemeket
+        private void MovePickableElement() /// ez mozgatja a felvehető elemeket
         {
             foreach (PickableElement pick in this.PickableElementCollection)
             {
@@ -323,7 +323,7 @@
             }
         }
 
-        private void Move() // Ez mozgatja a játékos lövedékeit
+        private void Move() /// Ez mozgatja a játékos lövedékeit
         {
             foreach (Bullet item in this.Player.Bullets)
             {
@@ -331,7 +331,7 @@
             }
         }
 
-        private void ReadScore() // segédfüggvény. Ez olvassa be a rekordok txt-t és ezt tölti be a ranglistába
+        private void ReadScore() /// segédfüggvény. Ez olvassa be a rekordok txt-t és ezt tölti be a ranglistába
         {
             StreamReader sr = new StreamReader("rekordok.txt");
             while (!sr.EndOfStream)
@@ -346,7 +346,7 @@
             sr.Close();
         }
 
-        private void FindInactiveBullet(List<Bullet> bulletToInvestigate) // Ez fogja megtalálni és kitörölni azon a lövedékeket amelyek elhagyták a pályát
+        private void FindInactiveBullet(List<Bullet> bulletToInvestigate) /// Ez fogja megtalálni és kitörölni azon a lövedékeket amelyek elhagyták a pályát
         {
             this.bulletsToDelete = new List<Bullet>();
             foreach (Bullet bullet in bulletToInvestigate)
@@ -366,7 +366,7 @@
             }
         }
 
-        private void FindInactiveEnemies() // Törli azokat az ellenségeket akik kimentek a pályáról. Ezt a könnyű ellenfeleknél kell detektálni
+        private void FindInactiveEnemies() /// Törli azokat az ellenségeket akik kimentek a pályáról. Ezt a könnyű ellenfeleknél kell detektálni
         {
             this.enemyToDelete = new List<Enemy>();
             foreach (Enemy enemy in this.enemyList)
@@ -383,7 +383,7 @@
             }
         }
 
-        private void PlayerBullettCollideWithEnemy() // detektálja hogy a lövésünk lelőtt-e egy ellenfelet. Ha igen a golyót is törli ha az ellenségnek elfogyott a pontja akkor őt is( de ha nem akkor csak sebzi)
+        private void PlayerBullettCollideWithEnemy() /// detektálja hogy a lövésünk lelőtt-e egy ellenfelet. Ha igen a golyót is törli ha az ellenségnek elfogyott a pontja akkor őt is( de ha nem akkor csak sebzi)
         {
             this.enemyToDelete = new List<Enemy>();
             this.bulletsToDelete = new List<Bullet>();
@@ -416,13 +416,13 @@
             }
         }
 
-        private void PointIncrease(int value) // Növeli a játékos pontját
+        private void PointIncrease(int value) /// Növeli a játékos pontját
         {
             this.Player.Score += value;
             this.makeItDifficult += 0.05;
         }
 
-        private void EnemyBulletsCollisionWithPlayer() // detekálja hogy kaptunk-e be találatot
+        private void EnemyBulletsCollisionWithPlayer() /// detekálja hogy kaptunk-e be találatot
         {
             foreach (Enemy enemy in this.enemyList)
             {
@@ -445,7 +445,7 @@
             }
         }
 
-        private void PlayerCollisionWithPickableElement() // detektálja és kezeli ha felvettünk egy boost elemet
+        private void PlayerCollisionWithPickableElement() /// detektálja és kezeli ha felvettünk egy boost elemet
         {
             List<PickableElement> toDelete = new List<PickableElement>();
             foreach (PickableElement pick in this.pickableElementCollection)
@@ -487,7 +487,7 @@
             }
         }
 
-        private void EnemyCollideWithPlayer() // detektálja hogy a lezuhanó ellenfelek ütköztek-e velünk. ha igen sebesíti ha 0 az életpontja akkor törli
+        private void EnemyCollideWithPlayer() /// detektálja hogy a lezuhanó ellenfelek ütköztek-e velünk. ha igen sebesíti ha 0 az életpontja akkor törli
         {
             this.enemyToDelete = new List<Enemy>();
             foreach (Enemy enemy in this.enemyList)

@@ -20,12 +20,12 @@ namespace Star_Wars_Invaders
         private int moveCounting = 2;
         private int immortalCount = 120;
 
-        public MainWindow() // Főablak konstruktora
+        public MainWindow() /// Főablak konstruktora
         {
             this.InitializeComponent();
         }
 
-        private void Timer_Tick(object sender, EventArgs e) // Ebben található mit hív meg a DispactherTimer
+        private void Timer_Tick(object sender, EventArgs e) /// Ebben található mit hív meg a DispactherTimer
         {
             if (this.vm.LeaderBoardOpen)
             {
@@ -81,12 +81,12 @@ namespace Star_Wars_Invaders
             }
         }
 
-        private void Window_KeyDown(object sender, System.Windows.Input.KeyEventArgs e) // kezeli a billentyűlenyomást
+        private void Window_KeyDown(object sender, System.Windows.Input.KeyEventArgs e) /// kezeli a billentyűlenyomást
         {
             this.vm.Billentyunyomas(e.Key);
         }
 
-        private void Window_Loaded(object sender, RoutedEventArgs e) // mi történjen az ablak betöltődése után
+        private void Window_Loaded(object sender, RoutedEventArgs e) /// mi történjen az ablak betöltődése után
         {
             this.vm = new GameLogic(new Size(this.Jatekter.ActualWidth, this.Jatekter.ActualHeight));
             this.Jatekter.Init(this.vm);
@@ -96,7 +96,7 @@ namespace Star_Wars_Invaders
             this.timer.Start();
         }
 
-        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e) // mi történjen az ablak berázódásakor
+        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e) /// mi történjen az ablak berázódásakor
         {
             this.vm.SaveScores();
         }

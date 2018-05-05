@@ -10,16 +10,16 @@ namespace Star_Wars_Invaders
     using System.Windows.Media;
     using System.Windows.Media.Imaging;
 
-    public class GameField : FrameworkElement // Kirajzoló osztály
+    public class GameField : FrameworkElement /// Kirajzoló osztály
     {
-        private ImageBrush playerBrush; // player képét reprezentálja
-        private ImageBrush backgroundBrush; // hátteret reprezentálja
-        private ImageBrush yodaBrush; // egyik felvehető elemet reprenzáltja
-        private List<ImageBrush> enemies; // Az ellenségek képét tárolja
-        private ImageBrush heartBrush; // Életnövelő képet reprezentál
-        private GameLogic vm; // Egy Játéklogikát reprentál
+        private ImageBrush playerBrush; /// player képét reprezentálja
+        private ImageBrush backgroundBrush; /// hátteret reprezentálja
+        private ImageBrush yodaBrush; /// egyik felvehető elemet reprenzáltja
+        private List<ImageBrush> enemies; /// Az ellenségek képét tárolja
+        private ImageBrush heartBrush; /// Életnövelő képet reprezentál
+        private GameLogic vm; /// Egy Játéklogikát reprentál
 
-        public void Init(GameLogic vm) // Beállítja a GameLogicot és a játéksorán felhasznál képeket
+        public void Init(GameLogic vm) /// Beállítja a GameLogicot és a játéksorán felhasznál képeket
         {
             this.vm = vm;
             this.playerBrush = new ImageBrush(new BitmapImage(new Uri("Pics\\Player.png", UriKind.Relative)));
@@ -32,7 +32,7 @@ namespace Star_Wars_Invaders
             this.heartBrush = new ImageBrush(new BitmapImage(new Uri("Pics\\heart.png", UriKind.Relative)));
         }
 
-        protected override void OnRender(DrawingContext drawingContext) // kirajzoló függvény
+        protected override void OnRender(DrawingContext drawingContext) /// kirajzoló függvény
         {
             if (this.vm != null)
             {
